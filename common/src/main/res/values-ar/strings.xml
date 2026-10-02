@@ -113,7 +113,7 @@
     <string name="bluetooth_settings">إعدادات بلوتوث</string>
     <string name="byd_navigation">ملاحة BYD</string>
     <string name="cancel">إلغاء</string>
-    <string name="car_home">الرئيسية داخل السيارة</string>
+    <string name="exit">خروج</string>
     <string name="car_hotspot_details">بيانات نقطة اتصال السيارة</string>
     <string name="car_hotspot_is_off">نقطة اتصال السيارة مُغلقة</string>
     <string name="car_marker_horizontal">علامة السيارة · أفقية</string>

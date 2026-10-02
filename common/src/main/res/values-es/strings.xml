@@ -113,7 +113,7 @@
     <string name="bluetooth_settings">Ajustes de Bluetooth</string>
     <string name="byd_navigation">Navegación BYD</string>
     <string name="cancel">Cancelar</string>
-    <string name="car_home">Inicio del coche</string>
+    <string name="exit">Salir</string>
     <string name="car_hotspot_details">Datos del punto de acceso del coche</string>
     <string name="car_hotspot_is_off">El punto de acceso del coche está apagado</string>
     <string name="car_marker_horizontal">Marcador del coche · horizontal</string>

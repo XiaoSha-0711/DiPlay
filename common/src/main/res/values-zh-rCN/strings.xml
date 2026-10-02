@@ -108,7 +108,7 @@
     <string name="bluetooth_settings">蓝牙设置</string>
     <string name="byd_navigation">比亚迪导航</string>
     <string name="cancel">取消</string>
-    <string name="car_home">车机主页</string>
+    <string name="exit">退出</string>
     <string name="car_hotspot_details">车机热点详情</string>
     <string name="car_hotspot_is_off">车机热点未开启</string>
     <string name="car_marker_horizontal">车辆标记 · 水平</string>

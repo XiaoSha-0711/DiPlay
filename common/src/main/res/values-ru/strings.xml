@@ -113,7 +113,7 @@
     <string name="bluetooth_settings">Настройки Bluetooth</string>
     <string name="byd_navigation">Навигация BYD</string>
     <string name="cancel">Отмена</string>
-    <string name="car_home">Главная в автомобиле</string>
+    <string name="exit">Выйти</string>
     <string name="car_hotspot_details">Данные точки доступа автомобиля</string>
     <string name="car_hotspot_is_off">Точка доступа автомобиля выключена</string>
     <string name="car_marker_horizontal">Маркер автомобиля · по горизонтали</string>

@@ -46,12 +46,12 @@ jobs:
           echo "DIPLAY_AUTH_ASSETS_DIR=$dir" >> "$GITHUB_ENV"
       - name: Build standalone APK
         if: env.DIPLAY_AUTH_ASSETS_DIR != ''
-        run: ./gradlew :mobile:assembleStandaloneDebug --stacktrace
+        run: ./gradlew :shared:testDebugUnitTest :common:testDebugUnitTest :mobile:assembleStandaloneDebug --stacktrace
       - name: Build source-only APK (cannot connect to an iPhone)
         if: env.DIPLAY_AUTH_ASSETS_DIR == ''
         run: |
           echo "::warning::CarPlay authentication secrets are not set; this APK cannot connect to an iPhone."
-          ./gradlew :mobile:assembleDebug --stacktrace
+          ./gradlew :shared:testDebugUnitTest :common:testDebugUnitTest :mobile:assembleDebug --stacktrace
       - name: Remove authentication assets
         if: always()
         run: rm -rf "$RUNNER_TEMP/diplay-auth" ~/.android/debug.keystore

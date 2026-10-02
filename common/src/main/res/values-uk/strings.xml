@@ -116,7 +116,7 @@
     <string name="bluetooth_settings">Налаштування Bluetooth</string>
     <string name="byd_navigation">Навігація BYD</string>
     <string name="cancel">Скасувати</string>
-    <string name="car_home">Головний екран автомобіля</string>
+    <string name="exit">Вийти</string>
     <string name="car_hotspot_details">Дані точки доступу автомобіля</string>
     <string name="car_hotspot_is_off">Точку доступу автомобіля вимкнено</string>
     <string name="car_marker_horizontal">Маркер автомобіля · горизонтально</string>
