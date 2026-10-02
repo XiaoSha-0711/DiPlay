@@ -449,8 +449,8 @@
     <string name="adb_battery_reconnect">如果 CarPlay 在電池資料就緒前已連線，請使用「套用並重新連線」以啟用電池資料回報。</string>
     <string name="wheel_speed_for_tunnels">隧道中的車輪速度 · 需要 ADB</string>
     <string name="wheel_speed_for_tunnels_description">開啟「向 iPhone 報告位置」後，XiaoSha CarPlay 還會傳送車輪速度和檔位，讓 Apple 地圖在隧道和停車場裡也能繼續推算你的位置。會重新連線 CarPlay。需要在車機上開啟網路 ADB。</string>
-    <string name="video_while_parked">駐車時播放影片 · 需要 ADB</string>
-    <string name="video_while_parked_description">iOS 27：在 iPhone 上投送到 CarPlay 的影片會在車輛處於 P 檔時在車機螢幕上播放。掛出 P 檔時播放器會關閉；沒有 ADB 時影片保持關閉，iPhone 只播放聲音。普通 HTTPS 影片（例如來自 Safari）可以播放；受 FairPlay 保護的影片（例如 Apple TV+）需要獲得授權的接收器，在這裡無法播放。會重新連線 CarPlay。需要車機開啟網路 ADB。</string>
+    <string name="video_while_parked">停車時播放影片</string>
+    <string name="video_while_parked_description">iOS 27：從 iPhone 投送到 CarPlay 的影片會在這裡全螢幕播放。只在停車時開啟，行駛中請勿使用；關閉後播放器會關掉，iPhone 只保留聲音。一般 HTTPS 影片（例如 Safari）可以播放；受 FairPlay 保護的影片（例如 Apple TV+）無法播放。第一次開啟會重新連線 CarPlay。</string>
     <string name="cluster_song">儀表板顯示歌曲 · 需要 ADB</string>
     <string name="cluster_song_description">CarPlay 正在播放的歌曲名和歌手會顯示在儀表板的音樂卡片中，並同步播放和暫停狀態。卡片以比亞迪的「其他」音源顯示，因為儀表板不會繪製 CarPlay 自身的音源。立即生效。需要車機開啟網路 ADB。</string>
     <string name="video_back_to_carplay">返回 CarPlay</string>

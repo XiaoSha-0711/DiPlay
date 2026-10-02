@@ -2673,6 +2673,7 @@ class CarPlayHostActivity : ComponentActivity() {
             model = normalizedModel(),
             oemLabel = oemLabel,
             icons = listOf(loadAirPlayIcon()),
+            videoInCar = AirPlayPersistence.loadVideoWhileParked(this),
         )
     }
 
@@ -3048,6 +3049,7 @@ class CarPlayHostActivity : ComponentActivity() {
         )
         controller = next
         CarPlayMediaKeys.attach(this, next)
+        if (airPlayConfig.videoInCar) CarPlayVideo.attach(this, next)
         val display = CarPlaySessionDisplay(airPlayConfig.main.widthPixels, airPlayConfig.main.heightPixels,
             displayRotation(), hideTopBar, hideBottomBar, size.width, size.height)
         sessionDisplay = display

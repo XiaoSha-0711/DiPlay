@@ -85,6 +85,7 @@ object AirPlayPersistence {
     const val DAY_NIGHT_NIGHT = 2
     private const val KEY_DAY_NIGHT_MODE = "day_night_mode"
     private const val KEY_EXIT_WHEN_DISCONNECTED = "exit_when_disconnected"
+    private const val KEY_VIDEO_WHILE_PARKED = "video_while_parked"
 
     fun loadDisplayScaleTenths(context: Context): Int {
         val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
@@ -444,6 +445,14 @@ object AirPlayPersistence {
             .putInt(KEY_MAX_DETECTED_WIDTH, widthPixels.coerceAtLeast(0))
             .putInt(KEY_MAX_DETECTED_HEIGHT, heightPixels.coerceAtLeast(0))
             .apply()
+    }
+
+    /** iOS 27 video in car. A phone cannot read the gear, so the user switches it on only while parked. */
+    fun loadVideoWhileParked(context: Context): Boolean =
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getBoolean(KEY_VIDEO_WHILE_PARKED, false)
+
+    fun saveVideoWhileParked(context: Context, enabled: Boolean) {
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putBoolean(KEY_VIDEO_WHILE_PARKED, enabled).apply()
     }
 
     /** Close the app when CarPlay stays disconnected, so nothing keeps running after the drive. */

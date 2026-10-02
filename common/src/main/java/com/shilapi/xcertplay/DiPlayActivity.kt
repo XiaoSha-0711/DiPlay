@@ -265,6 +265,11 @@ class DiPlayActivity : ComponentActivity() {
         }
         section(content, getString(R.string.display_and_performance), R.drawable.ic_dp_display) { card ->
             carPlaySizeControl(card)
+            toggle(card, getString(R.string.video_while_parked), getString(R.string.video_while_parked_description), AirPlayPersistence.loadVideoWhileParked(this)) {
+                AirPlayPersistence.saveVideoWhileParked(this, it)
+                // The iPhone learns about video in car when CarPlay connects; switching off applies at once.
+                if (it && CarPlayBackgroundSession.hasSession()) connect(AirPlayPersistence.loadWirelessEnabled(this))
+            }
             choice(card, getString(R.string.day_night_mode), listOf(getString(R.string.day_night_auto), getString(R.string.day_night_day), getString(R.string.day_night_night)),
                 AirPlayPersistence.loadDayNightMode(this), reconnects = false) { AirPlayPersistence.saveDayNightMode(this, it) }
             choice(card, getString(R.string.resolution), listOf(getString(R.string.resolution_native), getString(R.string.s_80_lighter_load), getString(R.string.s_60_lightest_load)), listOf(10, 8, 6).indexOf(AirPlayPersistence.loadDisplayScaleTenths(this)).coerceAtLeast(0)) { AirPlayPersistence.saveDisplayScaleTenths(this, listOf(10, 8, 6)[it]) }
