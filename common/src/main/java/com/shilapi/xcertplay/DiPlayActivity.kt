@@ -169,6 +169,12 @@ class DiPlayActivity : ComponentActivity() {
         }
     }
 
+    // The Android Auto receiver (Open Headunit, the androidauto module) ships in the same APK.
+    private fun openAndroidAuto() {
+        val intent = Intent().setClassName(this, "com.andrerinas.openheadunit.main.MainActivity")
+        if (runCatching { startActivity(intent) }.isFailure) toast(getString(R.string.android_auto_unavailable))
+    }
+
     private fun home(content: LinearLayout) {
         val wide = resources.configuration.screenWidthDp >= 850
         val body = column()
@@ -213,6 +219,8 @@ class DiPlayActivity : ComponentActivity() {
         }
         right.addView(button(getString(R.string.connect_with_usb), false) { connect(false) }, matchButton())
         right.addView(label(getString(R.string.plug_your_iphone_into_a_usb_data_port_allow_carplay_when_y), 14, MUTED).apply { gravity = Gravity.CENTER; setPadding(dp(8), dp(10), dp(8), dp(24)) })
+        right.addView(button(getString(R.string.android_auto), false) { openAndroidAuto() }, matchButton())
+        right.addView(label(getString(R.string.android_auto_hint), 14, MUTED).apply { gravity = Gravity.CENTER; setPadding(dp(8), dp(10), dp(8), dp(24)) })
         right.addView(button(getString(R.string.settings), false) { page = "settings"; render() }, matchButton())
         right.addView(label(getString(R.string.make_diplay_feel_right_for_your_car), 14, MUTED).apply { gravity = Gravity.CENTER; setPadding(0, dp(10), 0, dp(24)) })
         right.addView(label("${getString(R.string.home_public_preview)}${version()}", 12, MUTED).apply { letterSpacing = .08f })

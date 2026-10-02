@@ -62,6 +62,7 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(project(":common"))
     implementation(project(":shared"))
+    implementation(project(":androidauto"))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.app.projected)
     implementation(libs.androidx.compose.material3)

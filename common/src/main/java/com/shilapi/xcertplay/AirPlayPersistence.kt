@@ -77,7 +77,7 @@ object AirPlayPersistence {
     const val DEFAULT_MODEL = APP_DISPLAY_NAME
     const val DEFAULT_OEM_LABEL = "XiaoSha"
     /** Earlier releases defaulted to these and saved them with the settings; read them as the defaults. */
-    private const val LEGACY_DEFAULT_IDENTITY = "DiPlay"
+    private val LEGACY_DEFAULT_IDENTITIES = setOf("DiPlay", "XiaoSha CarPlay")
     private const val LEGACY_DEFAULT_OEM_LABEL = "BYD"
     const val DEFAULT_MFI_I2C_PATH = "/dev/i2c-1"
     const val DAY_NIGHT_AUTO = 0
@@ -345,7 +345,7 @@ object AirPlayPersistence {
     fun loadManufacturer(context: Context): String =
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
             .getString(KEY_MANUFACTURER, null)
-            ?.takeIf { it.isNotBlank() && it != LEGACY_DEFAULT_IDENTITY }
+            ?.takeIf { it.isNotBlank() && it !in LEGACY_DEFAULT_IDENTITIES }
             ?: DEFAULT_MANUFACTURER
 
     fun saveManufacturer(context: Context, manufacturer: String) {
@@ -357,7 +357,7 @@ object AirPlayPersistence {
     fun loadModel(context: Context): String =
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
             .getString(KEY_MODEL, null)
-            ?.takeIf { it.isNotBlank() && it != LEGACY_DEFAULT_IDENTITY }
+            ?.takeIf { it.isNotBlank() && it !in LEGACY_DEFAULT_IDENTITIES }
             ?: DEFAULT_MODEL
 
     fun saveModel(context: Context, model: String) {

@@ -19,6 +19,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // Open Headunit's libsu (androidauto module).
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
@@ -27,3 +29,4 @@ include(":common")
 include(":mobile")
 include(":automotive")
 include(":shared")
+include(":androidauto")
