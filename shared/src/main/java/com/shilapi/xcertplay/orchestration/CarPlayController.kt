@@ -929,9 +929,12 @@ class CarPlayController(
                 is CarPlayVpnService.AttachResult.Failed ->
                     throw IOException(result.message)
             }
+            val listenerPort = service.boundPort() ?: wirelessAirPlayConfig.port
+            val advertisedAirPlayConfig = wirelessAirPlayConfig.copy(port = listenerPort)
             debugLog(
                 "wireless AirPlay listener attached bind=$hostAddressText " +
-                    "port=${airPlayConfig.port}",
+                    "port=$listenerPort" +
+                    (if (listenerPort != airPlayConfig.port) " (preferred ${airPlayConfig.port} in use)" else ""),
             )
             if (isStaleWirelessRun(generation)) {
                 closeWirelessStack()
@@ -940,7 +943,7 @@ class CarPlayController(
 
             val bonjourClient = CarPlayBonjour(
                 context = appContext,
-                config = wirelessAirPlayConfig,
+                config = advertisedAirPlayConfig,
                 identity = identity,
                 advertisedHost = hostAddress.hostAddress,
                 // Bind discovery and its connect probe to the same AP/address family as AirPlay.
@@ -991,7 +994,7 @@ class CarPlayController(
                 channel = hotspotInfo.channel,
                 security = hotspotInfo.security,
                 ipAddresses = listOf(hostAddressText),
-                airPlayPort = airPlayConfig.port,
+                airPlayPort = listenerPort,
                 deviceIdentifier = deviceIdentifier,
                 publicKey = identity.publicKeyHex,
                 sourceVersion = airPlayConfig.sourceVersion,
@@ -1564,7 +1567,7 @@ class CarPlayController(
                 ?: throw IphoneUsbException.DeviceUnavailable("MFi coprocessor client is unavailable")
             val endpoint = Iap2WiredCarPlayEndpoint(
                 ipv6Addresses = listOf(config.linkLocal),
-                airPlayPort = airPlayConfig.port,
+                airPlayPort = vpnService?.boundPort() ?: airPlayConfig.port,
                 publicKey = identity.publicKeyHex,
                 sourceVersion = airPlayConfig.sourceVersion,
                 deviceIdentifier = ncmHostMac.macString(),
