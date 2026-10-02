@@ -406,7 +406,7 @@ class CarPlayHostActivity : ComponentActivity() {
         window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         initializeSessionLog()
         lastConfiguration = Configuration(resources.configuration)
-        darkMode = nightModeOrNull(resources.configuration.uiMode) ?: false
+        darkMode = effectiveNight(nightModeOrNull(resources.configuration.uiMode)) ?: false
         advancedAudioChannelMappingSupported =
             resources.getBoolean(R.bool.config_advanced_audio_channel_mapping)
         airPlayIdentity = AirPlayPersistence.loadIdentity(this)
@@ -580,6 +580,7 @@ class CarPlayHostActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
+        applyDayNightSetting()
         val languagePreference = AppLocale.preference(this)
         if (Build.VERSION.SDK_INT < 33 && languagePreference != languagePreferenceAtCreate) {
             languagePreferenceAtCreate = languagePreference
@@ -3045,10 +3046,26 @@ class CarPlayHostActivity : ComponentActivity() {
         if (lastConfiguration == newConfig) return
         // resources.configuration is mutated in place, so keep a copy to compare against.
         lastConfiguration = Configuration(newConfig)
-        val night = nightModeOrNull(newConfig.uiMode) ?: return
+        val night = effectiveNight(nightModeOrNull(newConfig.uiMode)) ?: return
         if (night == darkMode) return
         darkMode = night
         appendLog("Head unit switched to ${if (night) "night" else "day"} mode")
+        syncAirPlayDarkMode()
+    }
+
+    /** The day/night setting wins over Android; on Auto, null keeps the previous state. */
+    private fun effectiveNight(systemNight: Boolean?): Boolean? = when (AirPlayPersistence.loadDayNightMode(this)) {
+        AirPlayPersistence.DAY_NIGHT_DAY -> false
+        AirPlayPersistence.DAY_NIGHT_NIGHT -> true
+        else -> systemNight
+    }
+
+    // The setting may have changed in the home screen while CarPlay ran in the background.
+    private fun applyDayNightSetting() {
+        val night = effectiveNight(nightModeOrNull(resources.configuration.uiMode)) ?: return
+        if (night == darkMode) return
+        darkMode = night
+        appendLog("Day/night setting: ${if (night) "night" else "day"}")
         syncAirPlayDarkMode()
     }
 

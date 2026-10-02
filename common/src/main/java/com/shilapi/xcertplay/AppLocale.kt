@@ -16,12 +16,13 @@ object AppLocale {
     const val SYSTEM = "system"
     const val ENGLISH = "en"
     const val SIMPLIFIED_CHINESE = "zh"
+    const val TRADITIONAL_CHINESE = "zh-TW"
     const val ARABIC = "ar"
     const val RUSSIAN = "ru"
     const val SPANISH = "es"
     const val UKRAINIAN = "uk"
 
-    val ALL = listOf(SYSTEM, ENGLISH, SIMPLIFIED_CHINESE, ARABIC, RUSSIAN, SPANISH, UKRAINIAN)
+    val ALL = listOf(SYSTEM, TRADITIONAL_CHINESE, ENGLISH, SIMPLIFIED_CHINESE, ARABIC, RUSSIAN, SPANISH, UKRAINIAN)
 
     private const val PREFS = "diplay"
     private const val KEY_LANGUAGE = "app_language"
@@ -31,7 +32,7 @@ object AppLocale {
     fun preference(context: Context): String {
         if (Build.VERSION.SDK_INT >= 33) {
             val locales = context.getSystemService(LocaleManager::class.java).applicationLocales
-            return if (locales.isEmpty) SYSTEM else locales[0].language
+            return if (locales.isEmpty) SYSTEM else key(locales[0])
         }
         return context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
             .getString(KEY_LANGUAGE, SYSTEM)?.takeIf { it in ALL } ?: SYSTEM
@@ -97,6 +98,7 @@ object AppLocale {
         SYSTEM -> context.getString(R.string.language_system_default)
         ENGLISH -> "English"
         SIMPLIFIED_CHINESE -> "简体中文"
+        TRADITIONAL_CHINESE -> "繁體中文"
         ARABIC -> "العربية"
         RUSSIAN -> "Русский"
         SPANISH -> "Español"
@@ -104,9 +106,15 @@ object AppLocale {
         else -> language
     }
 
+    /** Chinese is told apart by script or region: Hant, Taiwan, Hong Kong and Macau read Traditional. */
+    private fun key(locale: Locale): String =
+        if (locale.language == "zh" && (locale.script == "Hant" || locale.country in setOf("TW", "HK", "MO"))) TRADITIONAL_CHINESE
+        else locale.language
+
     private fun locale(language: String): Locale? = when (language) {
         ENGLISH -> Locale.ENGLISH
         SIMPLIFIED_CHINESE -> Locale.SIMPLIFIED_CHINESE
+        TRADITIONAL_CHINESE -> Locale.TRADITIONAL_CHINESE
         ARABIC -> Locale("ar")
         RUSSIAN -> Locale("ru")
         SPANISH -> Locale("es")

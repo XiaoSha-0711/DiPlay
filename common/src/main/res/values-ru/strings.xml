@@ -465,4 +465,8 @@
     <string name="center_map_no_permission_screen">На этом головном устройстве нет экрана настроек для этого разрешения. Разрешите его через ADB.</string>
     <string name="launcher_map_sharing">Делиться живой картой с другими лаунчерами</string>
     <string name="launcher_map_sharing_description">Лаунчеры с поддержкой XiaoSha CarPlay смогут показывать живую карту приборной панели на своём главном экране. Выключено по умолчанию, потому что тогда карту сможет запросить любое приложение на головном устройстве. Подробнее: docs/LAUNCHER_INTEGRATION.md.</string>
+    <string name="day_night_mode">День/ночь</string>
+    <string name="day_night_auto">Авто · как в Android</string>
+    <string name="day_night_day">Всегда день</string>
+    <string name="day_night_night">Всегда ночь</string>
 </resources>

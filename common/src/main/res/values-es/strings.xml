@@ -465,4 +465,8 @@
     <string name="center_map_no_permission_screen">Esta unidad principal no tiene pantalla de ajustes para este permiso. Permítelo por ADB.</string>
     <string name="launcher_map_sharing">Compartir el mapa en vivo con otros launchers</string>
     <string name="launcher_map_sharing_description">Los launchers compatibles con XiaoSha CarPlay pueden mostrar el mapa en vivo del panel de instrumentos en su propia pantalla de inicio. Desactivado por defecto, porque entonces cualquier aplicación de la unidad principal podría pedir el mapa. Consulta docs/LAUNCHER_INTEGRATION.md.</string>
+    <string name="day_night_mode">Día/noche</string>
+    <string name="day_night_auto">Automático · según Android</string>
+    <string name="day_night_day">Siempre día</string>
+    <string name="day_night_night">Siempre noche</string>
 </resources>

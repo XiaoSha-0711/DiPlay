@@ -457,4 +457,8 @@
     <string name="video_play">Відтворити</string>
     <string name="video_pause">Пауза</string>
     <string name="video_cannot_play">Це відео не можна відтворити на екрані автомобіля. Для захищеного відео, зокрема Apple TV+, потрібен ліцензований приймач.</string>
+    <string name="day_night_mode">День/ніч</string>
+    <string name="day_night_auto">Авто · як в Android</string>
+    <string name="day_night_day">Завжди день</string>
+    <string name="day_night_night">Завжди ніч</string>
 </resources>

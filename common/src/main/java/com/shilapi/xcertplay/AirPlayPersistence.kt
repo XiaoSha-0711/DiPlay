@@ -80,6 +80,10 @@ object AirPlayPersistence {
     private const val LEGACY_DEFAULT_IDENTITY = "DiPlay"
     private const val LEGACY_DEFAULT_OEM_LABEL = "BYD"
     const val DEFAULT_MFI_I2C_PATH = "/dev/i2c-1"
+    const val DAY_NIGHT_AUTO = 0
+    const val DAY_NIGHT_DAY = 1
+    const val DAY_NIGHT_NIGHT = 2
+    private const val KEY_DAY_NIGHT_MODE = "day_night_mode"
 
     fun loadDisplayScaleTenths(context: Context): Int {
         val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
@@ -439,6 +443,15 @@ object AirPlayPersistence {
             .putInt(KEY_MAX_DETECTED_WIDTH, widthPixels.coerceAtLeast(0))
             .putInt(KEY_MAX_DETECTED_HEIGHT, heightPixels.coerceAtLeast(0))
             .apply()
+    }
+
+    /** CarPlay's day/night look: [DAY_NIGHT_AUTO] follows Android, or always day, or always night. */
+    fun loadDayNightMode(context: Context): Int =
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getInt(KEY_DAY_NIGHT_MODE, DAY_NIGHT_AUTO)
+            .takeIf { it in DAY_NIGHT_AUTO..DAY_NIGHT_NIGHT } ?: DAY_NIGHT_AUTO
+
+    fun saveDayNightMode(context: Context, mode: Int) {
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putInt(KEY_DAY_NIGHT_MODE, mode).apply()
     }
 
     fun loadRightHandDrive(context: Context): Boolean =

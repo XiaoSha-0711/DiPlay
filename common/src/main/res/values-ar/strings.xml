@@ -465,4 +465,8 @@
     <string name="center_map_no_permission_screen">لا توجد في وحدة القيادة شاشة إعدادات لهذا الإذن. اسمح به عبر ADB.</string>
     <string name="launcher_map_sharing">مشاركة الخريطة المباشرة مع المشغّلات الأخرى</string>
     <string name="launcher_map_sharing_description">يمكن للمشغّلات التي تدعم XiaoSha CarPlay عرض خريطة لوحة العدادات المباشرة داخل شاشتها الرئيسية. معطّل افتراضيًا، لأن أي تطبيق على وحدة القيادة يمكنه عندها طلب الخريطة. راجع docs/LAUNCHER_INTEGRATION.md.</string>
+    <string name="day_night_mode">نهار/ليل</string>
+    <string name="day_night_auto">تلقائي · حسب Android</string>
+    <string name="day_night_day">نهار دائمًا</string>
+    <string name="day_night_night">ليل دائمًا</string>
 </resources>

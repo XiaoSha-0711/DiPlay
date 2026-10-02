@@ -476,4 +476,8 @@
     <string name="center_map_no_permission_screen">此车机没有该权限的设置界面，请通过 ADB 允许。</string>
     <string name="launcher_map_sharing">与其他启动器共享实时地图</string>
     <string name="launcher_map_sharing_description">支持 XiaoSha CarPlay 的启动器可以在自己的主屏幕中显示实时仪表盘地图。默认关闭，因为开启后车机上的任何应用都可以请求该地图。详见 docs/LAUNCHER_INTEGRATION.md。</string>
+    <string name="day_night_mode">日夜模式</string>
+    <string name="day_night_auto">自动 · 跟随系统</string>
+    <string name="day_night_day">始终日间</string>
+    <string name="day_night_night">始终夜间</string>
 </resources>
