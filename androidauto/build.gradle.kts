@@ -9,27 +9,42 @@ plugins {
 
 // Android Auto's head-unit certificate and key. Open Headunit publishes them in its repository; this
 // one keeps private keys out of Git, so the build fetches them from that pinned commit and checks them.
-val headUnitIdentityDir = layout.buildDirectory.dir("generated/headunit-identity/res")
-val headUnitIdentity = mapOf(
-    "cert" to "851d80c86bf469a3dd121b7a7084ca97b91b3d2cc72922c451e0156b455f38c1",
-    "privkey" to "015d172a6e4d5b7f04a5c820a60a41673f99d6e01c2f658e2a0909efbf6d49f7",
-)
-val fetchHeadUnitIdentity by tasks.registering {
-    val outputDir = headUnitIdentityDir
-    outputs.dir(outputDir)
-    doLast {
+abstract class FetchHeadUnitIdentity : DefaultTask() {
+    @get:OutputDirectory
+    abstract val outputDir: DirectoryProperty
+
+    @TaskAction
+    fun fetch() {
         val raw = outputDir.get().asFile.resolve("raw").apply { mkdirs() }
-        headUnitIdentity.forEach { (name, sha256) ->
+        IDENTITY.forEach { (name, sha256) ->
             val target = raw.resolve(name)
-            fun digest(bytes: ByteArray) = MessageDigest.getInstance("SHA-256").digest(bytes)
-                .joinToString("") { "%02x".format(it) }
             if (target.isFile && digest(target.readBytes()) == sha256) return@forEach
-            val url = "https://raw.githubusercontent.com/andreknieriem/open-headunit/" +
-                "ebee4ce4d8666a5a727ee042ac7e8ecb5af8e17f/app/src/main/res/raw/$name"
+            val url = "https://raw.githubusercontent.com/andreknieriem/open-headunit/$COMMIT/app/src/main/res/raw/$name"
             val bytes = URI(url).toURL().openStream().use { it.readBytes() }
             check(digest(bytes) == sha256) { "Android Auto head-unit $name does not match its pinned checksum" }
             target.writeBytes(bytes)
         }
+    }
+
+    private fun digest(bytes: ByteArray) =
+        MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it) }
+
+    private companion object {
+        const val COMMIT = "ebee4ce4d8666a5a727ee042ac7e8ecb5af8e17f"
+        val IDENTITY = mapOf(
+            "cert" to "851d80c86bf469a3dd121b7a7084ca97b91b3d2cc72922c451e0156b455f38c1",
+            "privkey" to "015d172a6e4d5b7f04a5c820a60a41673f99d6e01c2f658e2a0909efbf6d49f7",
+        )
+    }
+}
+
+val fetchHeadUnitIdentity = tasks.register<FetchHeadUnitIdentity>("fetchHeadUnitIdentity") {
+    outputDir.set(layout.buildDirectory.dir("generated/headunit-identity/res"))
+}
+
+androidComponents {
+    onVariants { variant ->
+        variant.sources.res?.addGeneratedSourceDirectory(fetchHeadUnitIdentity, FetchHeadUnitIdentity::outputDir)
     }
 }
 
@@ -73,8 +88,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    sourceSets.getByName("main").res.srcDir(headUnitIdentityDir)
-
     lint {
         abortOnError = false
         disable += "PackagedPrivateKey"
@@ -113,4 +126,3 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 }
 
-tasks.named("preBuild") { dependsOn(fetchHeadUnitIdentity) }
