@@ -3,7 +3,7 @@ on:
   push:
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: build-apk-${{ github.ref }}
   cancel-in-progress: true
@@ -55,6 +55,18 @@ jobs:
       - name: Remove authentication assets
         if: always()
         run: rm -rf "$RUNNER_TEMP/diplay-auth" ~/.android/debug.keystore
+      - name: Publish interface screenshots to the ui-screenshots branch
+        if: always() && hashFiles('common/build/screenshots/*.png') != ''
+        run: |
+          dir=$(mktemp -d)
+          cp common/build/screenshots/*.png "$dir"/
+          cd "$dir"
+          git init -q -b ui-screenshots
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add -A
+          git commit -qm "Interface screenshots for ${GITHUB_SHA::7}"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ui-screenshots
       - name: Interface screenshots
         if: always()
         uses: actions/upload-artifact@v4
