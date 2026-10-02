@@ -485,4 +485,16 @@
     <string name="android_auto">Android Auto</string>
     <string name="android_auto_hint">自連模式（Self Mode）、無線或 USB 連接 Android 手機。</string>
     <string name="android_auto_unavailable">此版本沒有包含 Android Auto。</string>
+    <string name="home_eyebrow">把手機變成車機螢幕</string>
+    <string name="home_title">選擇你的手機</string>
+    <string name="home_subtitle">iPhone 使用 CarPlay，Android 手機使用 Android Auto。</string>
+    <string name="carplay_card_device">IPHONE</string>
+    <string name="android_auto_card_device">ANDROID 手機</string>
+    <string name="connect_wireless">無線連線</string>
+    <string name="open_android_auto">開啟 Android Auto</string>
+    <string name="hotspot_not_set">尚未設定車機熱點。請在「連線設定」填入熱點名稱和密碼。</string>
+    <string name="tab_connection">連線</string>
+    <string name="tab_display">顯示</string>
+    <string name="tab_audio">音訊</string>
+    <string name="tab_advanced">進階</string>
 </resources>

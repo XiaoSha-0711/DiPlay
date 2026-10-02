@@ -31,9 +31,12 @@ class UiScreenshotTest {
 
     private fun capture(orientation: String) {
         val dir = File("build/screenshots").apply { mkdirs() }
-        for (page in listOf("home", "connection", "settings", "about")) {
+        val pages = listOf("home", "connection", "settings:connection", "settings:display", "settings:audio", "settings:advanced", "about")
+        for (entry in pages) {
+            val page = entry.substringBefore(':')
+            val tab = entry.substringAfter(':', "")
             runCatching {
-                val intent = Intent().putExtra("page", page)
+                val intent = Intent().putExtra("page", page).apply { if (tab.isNotEmpty()) putExtra("tab", tab) }
                 val activity = Robolectric.buildActivity(DiPlayActivity::class.java, intent).setup().get()
                 val content = activity.findViewById<ViewGroup>(android.R.id.content).getChildAt(0)
                 val body = (content as? ScrollView)?.getChildAt(0) ?: content
@@ -47,8 +50,8 @@ class UiScreenshotTest {
                 val canvas = Canvas(bitmap)
                 canvas.drawColor(Color.rgb(20, 21, 25))
                 body.draw(canvas)
-                File(dir, "$orientation-$page.png").outputStream().use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
-            }.onFailure { println("UI screenshot $orientation-$page failed: $it") }
+                File(dir, "$orientation-${entry.replace(':', '-')}.png").outputStream().use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
+            }.onFailure { println("UI screenshot $orientation-$entry failed: $it") }
         }
     }
 }

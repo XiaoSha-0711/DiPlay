@@ -474,4 +474,16 @@
     <string name="android_auto">Android Auto</string>
     <string name="android_auto_hint">الوضع الذاتي أو اللاسلكي أو USB مع هاتف Android.</string>
     <string name="android_auto_unavailable">هذا الإصدار لا يتضمن Android Auto.</string>
+    <string name="home_eyebrow">هاتفك كشاشة للسيارة</string>
+    <string name="home_title">اختر هاتفك</string>
+    <string name="home_subtitle">CarPlay لهاتف iPhone، وAndroid Auto لهاتف Android.</string>
+    <string name="carplay_card_device">IPHONE</string>
+    <string name="android_auto_card_device">هاتف ANDROID</string>
+    <string name="connect_wireless">اتصال لاسلكي</string>
+    <string name="open_android_auto">فتح Android Auto</string>
+    <string name="hotspot_not_set">لم يتم إعداد نقطة اتصال السيارة بعد. أضف اسمها وكلمة مرورها في إعداد الاتصال.</string>
+    <string name="tab_connection">الاتصال</string>
+    <string name="tab_display">العرض</string>
+    <string name="tab_audio">الصوت</string>
+    <string name="tab_advanced">متقدم</string>
 </resources>

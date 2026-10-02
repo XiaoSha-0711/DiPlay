@@ -485,4 +485,16 @@
     <string name="android_auto">Android Auto</string>
     <string name="android_auto_hint">Self Mode, wireless or USB with an Android phone.</string>
     <string name="android_auto_unavailable">Android Auto is not included in this build.</string>
+    <string name="home_eyebrow">YOUR PHONE AS A CAR SCREEN</string>
+    <string name="home_title">Choose your phone</string>
+    <string name="home_subtitle">CarPlay for an iPhone, Android Auto for an Android phone.</string>
+    <string name="carplay_card_device">IPHONE</string>
+    <string name="android_auto_card_device">ANDROID PHONE</string>
+    <string name="connect_wireless">Connect wirelessly</string>
+    <string name="open_android_auto">Open Android Auto</string>
+    <string name="hotspot_not_set">No car hotspot is set up yet. Add its name and password in Connection setup.</string>
+    <string name="tab_connection">Connection</string>
+    <string name="tab_display">Display</string>
+    <string name="tab_audio">Audio</string>
+    <string name="tab_advanced">Advanced</string>
 </resources>

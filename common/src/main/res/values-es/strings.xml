@@ -474,4 +474,16 @@
     <string name="android_auto">Android Auto</string>
     <string name="android_auto_hint">Modo propio, inalámbrico o USB con un teléfono Android.</string>
     <string name="android_auto_unavailable">Esta versión no incluye Android Auto.</string>
+    <string name="home_eyebrow">TU TELÉFONO COMO PANTALLA DEL COCHE</string>
+    <string name="home_title">Elige tu teléfono</string>
+    <string name="home_subtitle">CarPlay para iPhone, Android Auto para teléfonos Android.</string>
+    <string name="carplay_card_device">IPHONE</string>
+    <string name="android_auto_card_device">TELÉFONO ANDROID</string>
+    <string name="connect_wireless">Conectar sin cables</string>
+    <string name="open_android_auto">Abrir Android Auto</string>
+    <string name="hotspot_not_set">Aún no hay punto de acceso del coche. Añade su nombre y contraseña en Configuración de conexión.</string>
+    <string name="tab_connection">Conexión</string>
+    <string name="tab_display">Pantalla</string>
+    <string name="tab_audio">Audio</string>
+    <string name="tab_advanced">Avanzado</string>
 </resources>

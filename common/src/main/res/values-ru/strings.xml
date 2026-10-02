@@ -474,4 +474,16 @@
     <string name="android_auto">Android Auto</string>
     <string name="android_auto_hint">Собственный режим, беспроводное или USB-подключение телефона Android.</string>
     <string name="android_auto_unavailable">В эту сборку Android Auto не входит.</string>
+    <string name="home_eyebrow">ТЕЛЕФОН КАК ЭКРАН АВТОМОБИЛЯ</string>
+    <string name="home_title">Выберите телефон</string>
+    <string name="home_subtitle">CarPlay для iPhone, Android Auto для телефона Android.</string>
+    <string name="carplay_card_device">IPHONE</string>
+    <string name="android_auto_card_device">ТЕЛЕФОН ANDROID</string>
+    <string name="connect_wireless">Подключить без проводов</string>
+    <string name="open_android_auto">Открыть Android Auto</string>
+    <string name="hotspot_not_set">Точка доступа автомобиля ещё не настроена. Укажите её имя и пароль в настройке подключения.</string>
+    <string name="tab_connection">Подключение</string>
+    <string name="tab_display">Экран</string>
+    <string name="tab_audio">Звук</string>
+    <string name="tab_advanced">Дополнительно</string>
 </resources>
