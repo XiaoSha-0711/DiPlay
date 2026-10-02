@@ -82,10 +82,11 @@ object AirPlayPersistence {
     private const val SAFE_AREA_KEY_PREFIX = "safe_area_"
     private const val CUSTOM_ICON_FILE = "airplay-icon.png"
 
-    const val DEFAULT_MANUFACTURER = "DiPlay"
-    const val DEFAULT_MODEL = "DiPlay"
+    const val DEFAULT_MANUFACTURER = APP_DISPLAY_NAME
+    const val DEFAULT_MODEL = APP_DISPLAY_NAME
     const val DEFAULT_OEM_LABEL = "XiaoSha"
-    /** Earlier releases defaulted to this label and saved it with the settings; read it as the default. */
+    /** Earlier releases defaulted to these and saved them with the settings; read them as the defaults. */
+    private const val LEGACY_DEFAULT_IDENTITY = "DiPlay"
     private const val LEGACY_DEFAULT_OEM_LABEL = "BYD"
     const val DEFAULT_MFI_I2C_PATH = "/dev/i2c-1"
 
@@ -357,7 +358,7 @@ object AirPlayPersistence {
     fun loadManufacturer(context: Context): String =
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
             .getString(KEY_MANUFACTURER, null)
-            ?.takeIf { it.isNotBlank() }
+            ?.takeIf { it.isNotBlank() && it != LEGACY_DEFAULT_IDENTITY }
             ?: DEFAULT_MANUFACTURER
 
     fun saveManufacturer(context: Context, manufacturer: String) {
@@ -369,7 +370,7 @@ object AirPlayPersistence {
     fun loadModel(context: Context): String =
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
             .getString(KEY_MODEL, null)
-            ?.takeIf { it.isNotBlank() }
+            ?.takeIf { it.isNotBlank() && it != LEGACY_DEFAULT_IDENTITY }
             ?: DEFAULT_MODEL
 
     fun saveModel(context: Context, model: String) {

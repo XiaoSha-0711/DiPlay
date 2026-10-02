@@ -102,7 +102,7 @@ internal object CarPlayMediaKeys {
         val granted = audio?.requestAudioFocus(request) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED
         focusRequest = request
         focusHeld = granted
-        session = MediaSession(context, "DiPlay CarPlay").apply {
+        session = MediaSession(context, APP_DISPLAY_NAME).apply {
             setCallback(callback, mainHandler)
             isActive = true
         }
