@@ -1,0 +1,63 @@
+name: Build APK
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: build-apk-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # Optional repository secrets (Settings → Secrets and variables → Actions), each base64-encoded:
+      #   DIPLAY_IDENTITY_PK8_B64     offline-mfi/identity.pk8     → APK that can connect to an iPhone
+      #   DIPLAY_CERTIFICATE_P7B_B64  offline-mfi/certificate.p7b
+      #   DEBUG_KEYSTORE_B64          a debug.keystore, so each build updates the last install in place
+      IDENTITY_PK8_B64: ${{ secrets.DIPLAY_IDENTITY_PK8_B64 }}
+      CERTIFICATE_P7B_B64: ${{ secrets.DIPLAY_CERTIFICATE_P7B_B64 }}
+      DEBUG_KEYSTORE_B64: ${{ secrets.DEBUG_KEYSTORE_B64 }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject credential files in public source
+        run: python3 scripts/check_public_tree.py
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools platforms;android-37.0 build-tools;36.0.0 ndk;28.2.13676358
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Install stable debug signing key
+        if: env.DEBUG_KEYSTORE_B64 != ''
+        run: |
+          mkdir -p ~/.android
+          echo "$DEBUG_KEYSTORE_B64" | base64 -d > ~/.android/debug.keystore
+      - name: Provide CarPlay authentication assets
+        if: env.IDENTITY_PK8_B64 != '' && env.CERTIFICATE_P7B_B64 != ''
+        run: |
+          dir="$RUNNER_TEMP/diplay-auth"
+          mkdir -p "$dir/offline-mfi"
+          echo "$IDENTITY_PK8_B64" | base64 -d > "$dir/offline-mfi/identity.pk8"
+          echo "$CERTIFICATE_P7B_B64" | base64 -d > "$dir/offline-mfi/certificate.p7b"
+          echo "DIPLAY_AUTH_ASSETS_DIR=$dir" >> "$GITHUB_ENV"
+      - name: Build standalone APK
+        if: env.DIPLAY_AUTH_ASSETS_DIR != ''
+        run: ./gradlew :mobile:assembleStandaloneDebug --stacktrace
+      - name: Build source-only APK (cannot connect to an iPhone)
+        if: env.DIPLAY_AUTH_ASSETS_DIR == ''
+        run: |
+          echo "::warning::CarPlay authentication secrets are not set; this APK cannot connect to an iPhone."
+          ./gradlew :mobile:assembleDebug --stacktrace
+      - name: Remove authentication assets
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/diplay-auth" ~/.android/debug.keystore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: xiaosha-carplay-${{ github.sha }}
+          path: mobile/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 14
