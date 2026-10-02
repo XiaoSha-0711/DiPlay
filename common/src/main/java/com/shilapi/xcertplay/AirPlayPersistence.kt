@@ -84,7 +84,7 @@ object AirPlayPersistence {
 
     const val DEFAULT_MANUFACTURER = "DiPlay"
     const val DEFAULT_MODEL = "DiPlay"
-    const val DEFAULT_OEM_LABEL = "DiPlay"
+    const val DEFAULT_OEM_LABEL = "XiaoSha"
     /** Earlier releases defaulted to this label and saved it with the settings; read it as the default. */
     private const val LEGACY_DEFAULT_OEM_LABEL = "BYD"
     const val DEFAULT_MFI_I2C_PATH = "/dev/i2c-1"
