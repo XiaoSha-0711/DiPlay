@@ -84,6 +84,7 @@ object AirPlayPersistence {
     const val DAY_NIGHT_DAY = 1
     const val DAY_NIGHT_NIGHT = 2
     private const val KEY_DAY_NIGHT_MODE = "day_night_mode"
+    private const val KEY_EXIT_WHEN_DISCONNECTED = "exit_when_disconnected"
 
     fun loadDisplayScaleTenths(context: Context): Int {
         val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
@@ -443,6 +444,14 @@ object AirPlayPersistence {
             .putInt(KEY_MAX_DETECTED_WIDTH, widthPixels.coerceAtLeast(0))
             .putInt(KEY_MAX_DETECTED_HEIGHT, heightPixels.coerceAtLeast(0))
             .apply()
+    }
+
+    /** Close the app when CarPlay stays disconnected, so nothing keeps running after the drive. */
+    fun loadExitWhenDisconnected(context: Context): Boolean =
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getBoolean(KEY_EXIT_WHEN_DISCONNECTED, true)
+
+    fun saveExitWhenDisconnected(context: Context, enabled: Boolean) {
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putBoolean(KEY_EXIT_WHEN_DISCONNECTED, enabled).apply()
     }
 
     /** CarPlay's day/night look: [DAY_NIGHT_AUTO] follows Android, or always day, or always night. */

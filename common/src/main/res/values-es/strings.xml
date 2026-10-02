@@ -469,4 +469,6 @@
     <string name="day_night_auto">Automático · según Android</string>
     <string name="day_night_day">Siempre día</string>
     <string name="day_night_night">Siempre noche</string>
+    <string name="exit_when_disconnected">Cerrar la app al desconectar</string>
+    <string name="exit_when_disconnected_description">Si CarPlay termina o el Bluetooth del iPhone se desconecta y CarPlay no vuelve en 30 segundos, la app se cierra para no seguir funcionando.</string>
 </resources>

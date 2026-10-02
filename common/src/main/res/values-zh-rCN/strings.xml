@@ -480,4 +480,6 @@
     <string name="day_night_auto">自动 · 跟随系统</string>
     <string name="day_night_day">始终日间</string>
     <string name="day_night_night">始终夜间</string>
+    <string name="exit_when_disconnected">断开后自动退出应用</string>
+    <string name="exit_when_disconnected_description">CarPlay 结束或 iPhone 蓝牙断开后，30 秒内没有重新连上就自动退出应用，不会继续在后台耗电。</string>
 </resources>

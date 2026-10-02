@@ -469,4 +469,6 @@
     <string name="day_night_auto">Авто · как в Android</string>
     <string name="day_night_day">Всегда день</string>
     <string name="day_night_night">Всегда ночь</string>
+    <string name="exit_when_disconnected">Закрывать приложение после отключения</string>
+    <string name="exit_when_disconnected_description">Если CarPlay завершился или Bluetooth iPhone отключился и CarPlay не вернулся за 30 секунд, приложение закрывается, чтобы ничего не работало в фоне.</string>
 </resources>

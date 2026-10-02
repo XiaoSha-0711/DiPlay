@@ -269,6 +269,24 @@ class CarPlayHostActivity : ComponentActivity() {
     private var controller: CarPlayController? = null
     private var currentSurface: Surface? = null
     private var currentSurfaceTexture: SurfaceTexture? = null
+    // Set once CarPlay has run, so a disconnect before the first session never closes the app.
+    private var hadCarPlaySession = false
+    private val exitIfStillDisconnected = Runnable {
+        if (activeAirPlaySession != null || shuttingDown.get()) return@Runnable
+        if (!AirPlayPersistence.loadExitWhenDisconnected(this)) return@Runnable
+        appendLog("CarPlay stayed disconnected; closing the app")
+        exitApplication()
+    }
+    private val bluetoothDisconnectReceiver = object : android.content.BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action != android.bluetooth.BluetoothDevice.ACTION_ACL_DISCONNECTED) return
+            val device = intent.getParcelableExtra<android.bluetooth.BluetoothDevice>(android.bluetooth.BluetoothDevice.EXTRA_DEVICE)
+            val address = runCatching { device?.address }.getOrNull() ?: return
+            if (!address.equals(DiPlayPreferences.phoneAddress(context), ignoreCase = true)) return
+            appendLog("iPhone Bluetooth disconnected")
+            scheduleExitIfDisconnected()
+        }
+    }
     private var activeDisplaySize: DisplaySize? = null
     private var pendingDisplaySize: DisplaySize? = null
     private var sessionDisplay: CarPlaySessionDisplay? = null
@@ -404,6 +422,9 @@ class CarPlayHostActivity : ComponentActivity() {
             finish(); return
         }
         window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        val bluetoothFilter = android.content.IntentFilter(android.bluetooth.BluetoothDevice.ACTION_ACL_DISCONNECTED)
+        if (Build.VERSION.SDK_INT >= 33) registerReceiver(bluetoothDisconnectReceiver, bluetoothFilter, Context.RECEIVER_NOT_EXPORTED)
+        else registerReceiver(bluetoothDisconnectReceiver, bluetoothFilter)
         initializeSessionLog()
         lastConfiguration = Configuration(resources.configuration)
         darkMode = effectiveNight(nightModeOrNull(resources.configuration.uiMode)) ?: false
@@ -636,6 +657,8 @@ class CarPlayHostActivity : ComponentActivity() {
     }
 
     override fun onDestroy() {
+        runCatching { unregisterReceiver(bluetoothDisconnectReceiver) }
+        mainHandler.removeCallbacks(exitIfStillDisconnected)
         mainHandler.removeCallbacks(applyDisplaySize)
         mainHandler.removeCallbacks(expireOldLogLines)
         mainHandler.removeCallbacks(pollConfiguration)
@@ -2846,6 +2869,8 @@ class CarPlayHostActivity : ComponentActivity() {
                     }
                     activeAirPlaySession = session
                     CarPlayBackgroundSession.active = true
+                    hadCarPlaySession = true
+                    mainHandler.removeCallbacks(exitIfStillDisconnected)
                     reconnectAttempts = 0
                     syncAirPlayDarkMode()
                     if (menuOpen) return@runOnUiThread
@@ -2857,6 +2882,7 @@ class CarPlayHostActivity : ComponentActivity() {
                 runOnUiThread {
                     if (activeAirPlaySession === session) activeAirPlaySession = null
                     CarPlayBackgroundSession.active = false
+                    scheduleExitIfDisconnected()
                     if (menuOpen || controllerGeneration != restartGeneration) {
                         return@runOnUiThread
                     }
@@ -3305,6 +3331,13 @@ class CarPlayHostActivity : ComponentActivity() {
         shutdown(terminateProcess = true, reason = "settings exit application")
     }
 
+    // A grace period lets a short drop reconnect; only a lasting disconnect closes the app.
+    private fun scheduleExitIfDisconnected() {
+        if (!hadCarPlaySession || !AirPlayPersistence.loadExitWhenDisconnected(this)) return
+        mainHandler.removeCallbacks(exitIfStillDisconnected)
+        mainHandler.postDelayed(exitIfStillDisconnected, EXIT_WHEN_DISCONNECTED_MILLIS)
+    }
+
     private fun shutdown(terminateProcess: Boolean, reason: String, completion: () -> Unit = {}) {
         if (!shuttingDown.compareAndSet(false, true)) { completion(); return }
         restartGeneration += 1
@@ -3575,6 +3608,7 @@ class CarPlayHostActivity : ComponentActivity() {
         const val RECONNECT_DELAY_MILLIS = 2_000L
         const val IAP_TUNNEL_RECONNECT_DELAY_MILLIS = 15_000L
         const val CONTROLLER_CLOSE_TIMEOUT_MILLIS = 4_000L
+        const val EXIT_WHEN_DISCONNECTED_MILLIS = 30_000L
         const val AUDIO_CAPTURE_MARKER = "audio-capture.enabled"
         const val AUDIO_CAPTURE_DIRECTORY = "audio-captures"
         const val PROTOCOL_TRACE_PREFIX = "TRACE "
