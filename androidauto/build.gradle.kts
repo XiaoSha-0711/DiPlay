@@ -1,5 +1,8 @@
 // Android Auto receiver, vendored from Open Headunit (https://github.com/andreknieriem/open-headunit,
 // AGPL-3.0, see LICENSE and COPYRIGHT_MICHAEL_REID_GPLv3AFFERO.txt in this directory).
+import java.net.URI
+import java.security.MessageDigest
+
 plugins {
     id("com.android.library")
 }
@@ -18,12 +21,12 @@ val fetchHeadUnitIdentity by tasks.registering {
         val raw = outputDir.get().asFile.resolve("raw").apply { mkdirs() }
         headUnitIdentity.forEach { (name, sha256) ->
             val target = raw.resolve(name)
-            fun digest(bytes: ByteArray) = java.security.MessageDigest.getInstance("SHA-256").digest(bytes)
+            fun digest(bytes: ByteArray) = MessageDigest.getInstance("SHA-256").digest(bytes)
                 .joinToString("") { "%02x".format(it) }
             if (target.isFile && digest(target.readBytes()) == sha256) return@forEach
             val url = "https://raw.githubusercontent.com/andreknieriem/open-headunit/" +
                 "ebee4ce4d8666a5a727ee042ac7e8ecb5af8e17f/app/src/main/res/raw/$name"
-            val bytes = java.net.URI(url).toURL().openStream().use { it.readBytes() }
+            val bytes = URI(url).toURL().openStream().use { it.readBytes() }
             check(digest(bytes) == sha256) { "Android Auto head-unit $name does not match its pinned checksum" }
             target.writeBytes(bytes)
         }

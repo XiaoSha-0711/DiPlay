@@ -57,7 +57,7 @@ jobs:
         run: rm -rf "$RUNNER_TEMP/diplay-auth" ~/.android/debug.keystore
       - uses: actions/upload-artifact@v4
         with:
-          name: xiaosha-carplay-${{ github.sha }}
+          name: xiaosha-multiplay-${{ github.sha }}
           path: mobile/build/outputs/apk/debug/*.apk
           if-no-files-found: error
           retention-days: 14

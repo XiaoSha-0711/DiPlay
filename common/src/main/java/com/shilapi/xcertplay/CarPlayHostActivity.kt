@@ -691,7 +691,7 @@ class CarPlayHostActivity : ComponentActivity() {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
             setPadding(dp(32), dp(32), dp(32), dp(32))
-            setBackgroundColor(Color.rgb(12, 17, 27))
+            setBackgroundColor(Color.rgb(20, 21, 25))
             isClickable = true
         }
         panel.addView(ImageView(this).apply {
@@ -710,7 +710,7 @@ class CarPlayHostActivity : ComponentActivity() {
         panel.addView(TextView(this).apply {
             text = if (wirelessEnabled) getString(R.string.keep_your_iphone_nearby_with_bluetooth_and_wi_fi_on_allow)
                 else getString(R.string.use_a_usb_data_cable_and_unlock_your_iphone_allow_trust_an)
-            textSize = 17f; gravity = Gravity.CENTER; setTextColor(Color.rgb(168, 182, 202))
+            textSize = 17f; gravity = Gravity.CENTER; setTextColor(Color.rgb(154, 160, 170))
             setPadding(0, dp(14), 0, dp(24))
         })
         panel.addView(Button(this).apply {
@@ -721,13 +721,13 @@ class CarPlayHostActivity : ComponentActivity() {
         }, LinearLayout.LayoutParams(dp(300), dp(64)).apply { bottomMargin = dp(12) })
         panel.addView(Button(this).apply {
             text = getString(R.string.back_to_diplay); isAllCaps = false; textSize = 18f
-            setTextColor(Color.rgb(12, 17, 27))
-            background = GradientDrawable().apply { setColor(Color.rgb(166, 200, 255)); cornerRadius = dp(20).toFloat() }
+            setTextColor(Color.rgb(20, 21, 25))
+            background = GradientDrawable().apply { setColor(Color.rgb(110, 193, 255)); cornerRadius = dp(20).toFloat() }
             setOnClickListener { showDiPlayHome() }
         }, LinearLayout.LayoutParams(dp(300), dp(64)))
         panel.addView(TextView(this).apply {
             text = getString(R.string.in_carplay_swipe_down_with_three_fingers_to_open_diplay_se)
-            textSize = 13f; gravity = Gravity.CENTER; setTextColor(Color.rgb(168, 182, 202)); setPadding(0, dp(20), 0, 0)
+            textSize = 13f; gravity = Gravity.CENTER; setTextColor(Color.rgb(154, 160, 170)); setPadding(0, dp(20), 0, 0)
         })
         root.addView(panel, FrameLayout.LayoutParams(-1, -1))
         videoView = video
@@ -3618,12 +3618,12 @@ class CarPlayHostActivity : ComponentActivity() {
         const val THREE_FINGER_SWIPE_DISTANCE_DP = 72
         const val THREE_FINGER_SWIPE_DIRECTION_RATIO = 1.15f
         const val MAX_SETTINGS_MENU_WIDTH_PX = 1200
-        val MENU_BACKGROUND = Color.rgb(12, 16, 19)
-        val MENU_SECONDARY = Color.rgb(170, 180, 190)
-        val MENU_ACCENT = Color.rgb(127, 205, 154)
-        val MENU_ACCENT_TRACK = Color.rgb(78, 143, 102)
-        val MENU_TRACK_OFF = Color.rgb(64, 74, 80)
-        val MENU_BUTTON_TEXT = Color.rgb(8, 17, 11)
+        val MENU_BACKGROUND = Color.rgb(20, 21, 25)
+        val MENU_SECONDARY = Color.rgb(154, 160, 170)
+        val MENU_ACCENT = Color.rgb(110, 193, 255)
+        val MENU_ACCENT_TRACK = Color.rgb(47, 68, 89)
+        val MENU_TRACK_OFF = Color.rgb(52, 55, 61)
+        val MENU_BUTTON_TEXT = Color.rgb(8, 20, 32)
         val MENU_DANGER = Color.rgb(190, 45, 45)
         val NO_VIDEO_BACKGROUND = Color.rgb(0x16, 0x16, 0x18)
     }
