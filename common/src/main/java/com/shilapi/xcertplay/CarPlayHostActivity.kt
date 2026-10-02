@@ -695,7 +695,7 @@ class CarPlayHostActivity : ComponentActivity() {
             isClickable = true
         }
         panel.addView(ImageView(this).apply {
-            setImageResource(R.drawable.ic_carplay); contentDescription = getString(R.string.carplay)
+            setImageResource(R.drawable.ic_multiplay_logo); contentDescription = getString(R.string.carplay)
         }, LinearLayout.LayoutParams(dp(88), dp(88)))
         panel.addView(TextView(this).apply {
             text = getString(R.string.diplay); textSize = 34f; setTextColor(Color.rgb(241, 245, 252))

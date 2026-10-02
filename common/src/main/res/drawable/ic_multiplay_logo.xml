@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- XiaoSha MultiPlay logo: a white rounded square with a vertical and a horizontal blue bar. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,0 L76,0 A24,24 0 0 1 100,24 L100,76 A24,24 0 0 1 76,100 L24,100 A24,24 0 0 1 0,76 L0,24 A24,24 0 0 1 24,0 Z" />
+    <path
+        android:fillColor="#66AEF9"
+        android:pathData="M22,26 L32,26 A1,1 0 0 1 33,27 L33,73 A1,1 0 0 1 32,74 L22,74 A1,1 0 0 1 21,73 L21,27 A1,1 0 0 1 22,26 Z" />
+    <path
+        android:fillColor="#66AEF9"
+        android:pathData="M44,44 L83,44 A1,1 0 0 1 84,45 L84,55 A1,1 0 0 1 83,56 L44,56 A1,1 0 0 1 43,55 L43,45 A1,1 0 0 1 44,44 Z" />
+</vector>
