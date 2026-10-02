@@ -481,7 +481,7 @@
     <string name="day_night_day">Always day</string>
     <string name="day_night_night">Always night</string>
     <string name="exit_when_disconnected">Close the app after disconnecting</string>
-    <string name="exit_when_disconnected_description">When CarPlay ends or the iPhone's Bluetooth disconnects and CarPlay does not come back within 30 seconds, the app closes so nothing keeps running.</string>
+    <string name="exit_when_disconnected_description">When CarPlay ends or the iPhone\'s Bluetooth disconnects and CarPlay does not come back within 30 seconds, the app closes so nothing keeps running.</string>
     <string name="android_auto">Android Auto</string>
     <string name="android_auto_hint">Self Mode, wireless or USB with an Android phone.</string>
     <string name="android_auto_unavailable">Android Auto is not included in this build.</string>
