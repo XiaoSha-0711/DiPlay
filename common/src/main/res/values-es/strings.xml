@@ -172,7 +172,9 @@
     <string name="diagnostics">Diagnóstico</string>
     <string name="discard_changes_and_exit_settings">Descartar cambios y salir de los ajustes</string>
     <string name="disconnect">Desconectar</string>
-    <string name="speed_test">Test de velocidad</string>
+    <string name="speed_camera">Radares</string>
+    <string name="speed_camera_app">App de radares</string>
+    <string name="choose_speed_camera_app">Elige la app que abre el botón de inicio</string>
     <string name="discovering_iphone">Buscando iPhone</string>
     <string name="display_and_performance">Pantalla y rendimiento</string>
     <string name="display_video">Pantalla y vídeo</string>

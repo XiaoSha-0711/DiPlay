@@ -239,14 +239,32 @@ class DiPlayActivity : ComponentActivity() {
                 else connectAndroidAuto(DiPlayPreferences.lastAndroidAutoMethod(this))
             },
             androidAutoMethod = { index -> connectAndroidAuto(aaMethods[index]); render() },
-            speedTest = { openSpeedTest() },
+            speedCamera = { openSpeedCameraApp() },
         )
     }
 
-    /** Opens an installed speed-test app (Speedtest by Ookla, FAST, nPerf), else fast.com in the browser. */
-    private fun openSpeedTest() {
-        val app = SPEED_TEST_PACKAGES.firstNotNullOfOrNull { packageManager.getLaunchIntentForPackage(it) }
-        runCatching { startActivity(app ?: Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://fast.com"))) }
+    /** Opens the chosen speed-camera app; the first time, asks which one. */
+    private fun openSpeedCameraApp() {
+        val launch = DiPlayPreferences.speedCameraApp(this)?.let { packageManager.getLaunchIntentForPackage(it) }
+        if (launch != null) startActivity(launch) else chooseSpeedCameraApp(launchAfter = true)
+    }
+
+    private fun chooseSpeedCameraApp(launchAfter: Boolean = false) {
+        val apps = packageManager.queryIntentActivities(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER), 0)
+            .map { it.activityInfo.packageName to it.loadLabel(packageManager).toString() }
+            .filter { it.first != packageName }.distinctBy { it.first }.sortedBy { it.second.lowercase() }
+        android.app.AlertDialog.Builder(this)
+            .setTitle(R.string.choose_speed_camera_app)
+            .setItems(apps.map { it.second }.toTypedArray()) { _, index ->
+                DiPlayPreferences.saveSpeedCameraApp(this, apps[index].first)
+                render()
+                if (launchAfter) packageManager.getLaunchIntentForPackage(apps[index].first)?.let(::startActivity)
+            }
+            .show()
+    }
+
+    private fun speedCameraLabel(): String? = DiPlayPreferences.speedCameraApp(this)?.let { pkg ->
+        runCatching { packageManager.getApplicationLabel(packageManager.getApplicationInfo(pkg, 0)).toString() }.getOrNull()
     }
 
     private fun toggleItem(title: Int, description: Int?, value: Boolean, save: (Boolean) -> Unit) =
@@ -288,6 +306,7 @@ class DiPlayActivity : ComponentActivity() {
                 SettingItem.Link(getString(R.string.connection_setup), wirelessModeLabel()) { page = "connection" },
                 SettingItem.Link(getString(R.string.choose_iphone), phoneLabel()) { choosePhone() },
                 toggleItem(R.string.connect_when_diplay_opens, R.string.use_your_last_connection_type_and_selected_iphone, DiPlayPreferences.autoConnect(this)) { DiPlayPreferences.saveAutoConnect(this, it) },
+                SettingItem.Link(getString(R.string.speed_camera_app), speedCameraLabel()) { chooseSpeedCameraApp() },
                 toggleItem(R.string.exit_when_disconnected, R.string.exit_when_disconnected_description, AirPlayPersistence.loadExitWhenDisconnected(this)) { AirPlayPersistence.saveExitWhenDisconnected(this, it) },
                 toggleItem(R.string.report_location_to_iphone, R.string.sends_precise_android_location_as_carplay_gps_data_when_th, AirPlayPersistence.loadLocationReportingEnabled(this)) {
                     AirPlayPersistence.saveLocationReportingEnabled(this, it)
@@ -882,7 +901,6 @@ class DiPlayActivity : ComponentActivity() {
     private fun space(height: Int) = View(this).apply { layoutParams = LinearLayout.LayoutParams(1, dp(height)) }
     private fun dp(value: Int) = (value * resources.displayMetrics.density).toInt()
     companion object {
-        private val SPEED_TEST_PACKAGES = listOf("org.zwanoo.android.speedtest", "com.netflix.Speedtest", "com.nperf.tester")
         private val BG = Color.rgb(20, 21, 25)
         private val SURFACE = Color.rgb(34, 36, 40)
         private val BORDER = Color.rgb(47, 68, 89)

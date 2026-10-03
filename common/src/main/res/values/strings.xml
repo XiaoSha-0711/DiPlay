@@ -176,7 +176,9 @@
     <string name="diplay">XiaoSha MultiPlay</string>
     <string name="discard_changes_and_exit_settings">Discard changes and exit settings</string>
     <string name="disconnect">Disconnect</string>
-    <string name="speed_test">Speed test</string>
+    <string name="speed_camera">Speed camera alerts</string>
+    <string name="speed_camera_app">Speed camera app</string>
+    <string name="choose_speed_camera_app">Choose the app the home screen button opens</string>
     <string name="discovering_iphone">Discovering iPhone</string>
     <string name="display_and_performance">Display and performance</string>
     <string name="display_video">Display &amp; video</string>

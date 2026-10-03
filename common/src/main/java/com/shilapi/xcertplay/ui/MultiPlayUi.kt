@@ -85,7 +85,7 @@ internal class HomeActions(
     val carPlayDisconnect: () -> Unit,
     val androidAutoConnect: () -> Unit,
     val androidAutoMethod: (index: Int) -> Unit,
-    val speedTest: () -> Unit,
+    val speedCamera: () -> Unit,
 )
 
 @Composable
@@ -165,7 +165,7 @@ internal fun HomePage(model: HomeModel, actions: HomeActions) {
     }
     model.setupError?.let { (text, fix) -> Spacer(Modifier.height(16.dp)); Notice(text, fix) }
     Spacer(Modifier.height(16.dp))
-    SecondaryButton(stringResource(R.string.speed_test), onClick = actions.speedTest)
+    SecondaryButton(stringResource(R.string.speed_camera), onClick = actions.speedCamera)
     Spacer(Modifier.height(24.dp))
     Text("${stringResource(R.string.home_public_preview)}${model.version}", color = MultiPlayColors.Muted, fontSize = 12.sp)
 }

@@ -172,7 +172,9 @@
     <string name="diagnostics">Диагностика</string>
     <string name="discard_changes_and_exit_settings">Отменить изменения и выйти из настроек</string>
     <string name="disconnect">Отключить</string>
-    <string name="speed_test">Тест скорости</string>
+    <string name="speed_camera">Камеры скорости</string>
+    <string name="speed_camera_app">Приложение камер скорости</string>
+    <string name="choose_speed_camera_app">Выберите приложение для кнопки на главном экране</string>
     <string name="discovering_iphone">Поиск iPhone</string>
     <string name="display_and_performance">Экран и производительность</string>
     <string name="display_video">Экран и видео</string>

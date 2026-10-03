@@ -72,6 +72,11 @@ internal object DiPlayPreferences {
         prefs(context).edit().putString("last_aa_method", method).apply()
     }
 
+    fun speedCameraApp(context: Context): String? = prefs(context).getString("speed_camera_app", null)
+    fun saveSpeedCameraApp(context: Context, packageName: String) {
+        prefs(context).edit().putString("speed_camera_app", packageName).apply()
+    }
+
     const val CARPLAY = "carplay"
     const val ANDROID_AUTO = "android_auto"
     const val AA_WIRELESS = "wireless"
