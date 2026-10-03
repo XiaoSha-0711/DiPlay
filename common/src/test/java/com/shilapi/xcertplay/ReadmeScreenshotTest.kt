@@ -51,6 +51,8 @@ class ReadmeScreenshotTest {
                 androidAutoConnected = false, androidAutoMethod = 0, setupError = null, version = "0.2.9",
             )
             val actions = HomeActions({}, {}, {}, {}, {}, {})
+            // Let the activity finish drawing its own home first, so it cannot replace this one.
+            Shadows.shadowOf(android.os.Looper.getMainLooper()).idle()
             activity.setContent {
                 MultiPlayTheme {
                     MultiPlayScreen(activity.getString(R.string.diplay), home = true, onBack = {}, onSettings = {}, onExit = {}) {

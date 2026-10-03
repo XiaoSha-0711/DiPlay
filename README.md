@@ -1,60 +1,72 @@
-# DiPlay
+<p align="center">
+  <img src="docs/images/logo.png" width="96" alt="XiaoSha MultiPlay">
+</p>
 
-**CarPlay for compatible BYD Android head units.** Wired and wireless, with the familiar DiAuto interface. Independent app: `com.shihab.diplay`.
+<h1 align="center">XiaoSha MultiPlay</h1>
 
-> **BYD support scope:** These projects focus on BYD cars. They may work on other brands, but other brands are unsupported and there are no plans to add support or fix brand-specific incompatibilities.
+<p align="center">
+  把一支 Android 手機變成車用螢幕：iPhone 跑 <b>CarPlay</b>，Android 手機跑 <b>Android Auto</b>。<br>
+  <a href="README.en.md">English</a> ·
+  <a href="https://github.com/XiaoSha-0711/DiPlay/actions/workflows/build-apk.yml">下載 APK</a> ·
+  <a href="https://github.com/XiaoSha-0711/DiPlay/issues">回報問題</a>
+</p>
 
-[Download & website](https://shihabal3amri.github.io/DiPlay/) · [Release](https://github.com/shihabal3amri/DiPlay/releases/tag/v0.2.9) · [Report a problem](https://github.com/shihabal3amri/DiPlay/issues/new/choose)
+<p align="center">
+  <img src="docs/images/home-zh-TW.png" width="260" alt="首頁">
+  &nbsp;
+  <img src="docs/images/settings-zh-TW.png" width="260" alt="設定">
+</p>
 
-![DiPlay home](site/assets/home.png)
+<p align="center">
+  <img src="docs/images/home-landscape-zh-TW.png" width="640" alt="橫向首頁">
+</p>
 
-## 0.2.9 — public preview
+## 功能
 
-Install on the **car**, not the iPhone. No jailbreak, dongle, Mac, account or authentication server is required for use. Core CarPlay does not require ADB; optional dashboard, battery, wheel-speed and parked-video features do. Your head unit must permit APK installation. Wireless supports Wi-Fi Direct or the car’s existing hotspot; Wi-Fi Direct requires Android 10+; the APK supports Android 9+ for wired use.
+| | CarPlay（iPhone） | Android Auto（Android 手機） |
+|---|---|---|
+| 無線 | ✅ 車機熱點 / Wi-Fi Direct | ✅ |
+| USB | ✅ | ✅ |
+| Self Mode | — | ✅ 在同一支手機上跑 Android Auto |
 
-- Wired USB and wireless CarPlay with local authentication.
-- BYD HUD navigation with arrows, distance and street names on verified firmware.
-- Car hotspot support, improved audio buffering and saved receive diagnostics.
-- Automatic address discovery, fixed-channel Wi-Fi fallbacks and successful-configuration memory.
-- Icon/text size, resolution and frame rate; applying a display change reconnects CarPlay.
-- Local diagnostic export. Reports are sent only if you choose to share them.
-- Separate installation alongside DiAuto. Run one projection app at a time.
+- **一個介面管兩種投影**：首頁兩張卡片，按一下就連線，App 會記住上次用的方式。
+- **開啟 App 時自動連線**：用上次的方式自動連 CarPlay 或 Android Auto。
+- **斷線後自動結束 App**：CarPlay 結束或 iPhone 藍牙斷線 30 秒後自動關閉，不在背景耗電。
+- **日夜模式**：自動、白天或夜間。
+- **停車時播放影片**：iOS 27 的 CarPlay 影片功能（手動開啟，僅限停車使用）。
+- **測速照相快捷鍵**：首頁一鍵開啟你選的測速照相 App。
+- **省電**：只保留 CarPlay 和 Android Auto 需要的東西，右上角的電源鍵可以完全結束 App。
+- **7 種語言**：繁體中文、简体中文、English、Español、Русский、Українська、العربية。
 
-This is **not an Apple-certified product**. The APK bundles an experimental accessory identity recovered from public Carlinkit firmware, not a newly provisioned MFi identity for DiPlay. A bundled private key is extractable. Acceptance after future iOS updates, reliability across head units and suitability of that identity for general distribution are unresolved. This release invites community testing; it is not a guarantee of universal compatibility.
+## 安裝
 
-Earlier releases were tested on the development DiLink5.1 car: live windshield guidance and street names work, Car hotspot now starts CarPlay, and Wi-Fi Direct performance is substantially improved. Occasional audio cutouts remain and are deferred to a later update. The floating-map test build was installed on the development DiLink 5.1 car; feedback led to the pinch corrections in this release. Earlier wheel-speed and video contributions were tested on a BYD Tang with DiLink 5.0 and an iPhone 15 Pro on iOS 27; wheel-speed dead reckoning in tunnels remains unverified. Broader head-unit and iOS compatibility is not guaranteed. The HUD firmware scope and cleanup limits are documented in [BYD navigation](docs/BYD_NAVIGATION.md).
+1. 打開 [Actions → Build APK](https://github.com/XiaoSha-0711/DiPlay/actions/workflows/build-apk.yml)，點最新一次綠勾的執行。
+2. 在頁面下方 **Artifacts** 下載 `xiaosha-multiplay-…`，解壓縮得到 APK。
+3. 安裝到要放在車上的那支 **Android 手機**（不是 iPhone）。Android 9 以上。
+4. 打開 App，在設定裡填好車機熱點或選擇連線方式，回首頁按「連線」。
 
-## What’s new in 0.2.9
+新版直接覆蓋安裝即可，設定會保留。
 
-- Optional floating dashboard map on the centre screen: drag to move, pinch to resize, and tap to open CarPlay. The dashboard keeps its map; permission to draw over other apps is required.
-- Smoother map resizing, with no size jump when placing two fingers and immediate resizing away from the minimum or maximum.
-- Optional dashboard song title, artist and play/pause status through network ADB.
-- CarPlay navigation widget with turn, road, distance, arrival information and song, for launchers that support standard Android widgets.
-- Optional live-map embedding for compatible launchers on Android 11+, with developer map-host and DiPlay Home samples. Map sharing is off by default.
-- CarPlay follows BYD day/night changes and stays connected through camera resizing during an existing full-screen session. Connecting in a narrow camera window requires one reconnect when it grows.
-- Media and navigation audio stream choices 0–20, preserving older saved navigation selections.
-- Ukrainian app and website support; GPS no longer reports a northbound course when direction is unknown.
+## 自己編譯
 
-The navigation widget requires a launcher that accepts standard Android widgets; BYD’s built-in home does not accept arbitrary widgets. Floating and embedded maps require **CarPlay map on instrument cluster** to be enabled. The sample apps are developer examples supplied in source. See [release notes](docs/RELEASE-NOTES-0.2.9.md) for details.
+需要 JDK 25 和 Android SDK 37。
 
-## Documentation
+```sh
+./gradlew :mobile:assembleDebug
+```
 
-- [Install and connect](docs/INSTALL.md)
-- [Compatibility and troubleshooting](docs/COMPATIBILITY.md)
-- [Privacy and diagnostic reports](docs/PRIVACY.md)
-- [Build from source](docs/BUILD.md)
-- [Validation](docs/VALIDATION.md)
-- [Release notes](CHANGELOG.md)
-- [Credits and licenses](docs/THIRD_PARTY_NOTICES.md)
+要能連上 iPhone，CarPlay 驗證檔不放在 repo 裡，而是放在 GitHub Secrets（`DIPLAY_IDENTITY_PK8_B64`、`DIPLAY_CERTIFICATE_P7B_B64`），由 [build-apk.yml](.github/workflows/build-apk.yml) 編譯時帶入。沒有這兩個檔案也能編譯，只是 CarPlay 連不上，Android Auto 不受影響。詳見 [docs/BUILD.md](docs/BUILD.md)。
 
-The website is available in English, Arabic, Russian, Ukrainian, Spanish and Simplified Chinese. The app interface supports those same six languages. Choose the app language in Settings; on Android 13+, it stays synchronized with Android’s per-app language setting.
+## 注意
 
-## Source and credits
+- 這不是 Apple 或 Google 認證的產品，未來的 iOS 或 Android Auto 更新可能讓它失效。
+- 開車時請專心，影片功能只在停車時使用。
+- CarPlay 是 Apple Inc. 的商標，Android Auto 是 Google LLC 的商標，本專案與兩者沒有任何關係。
 
-Based on [xcertplay](https://github.com/shilapi/xcertplay), GPL-3.0. The home/settings UI and website adapt [DiAuto](https://github.com/shihabal3amri/DiAuto), AGPL-3.0; that license is included in `docs/licenses`. Preserve those notices when distributing modifications. CarPlay and its icon belong to Apple Inc.; no Apple or BYD affiliation or endorsement is implied.
+## 來源與授權
 
-This repository starts with a clean public source snapshot. Local research, tester reports and release-signing secrets are excluded. The complete source corresponding to the APK is provided with every release; experimental runtime identity assets are described separately in the build instructions and notices.
+- CarPlay 協定：[xcertplay](https://github.com/shilapi/xcertplay)（GPL-3.0）與 [DiPlay](https://github.com/shihabal3amri/DiPlay)
+- Android Auto：[Open Headunit](https://github.com/andreknieriem/open-headunit)（AGPL-3.0）
+- 介面設計參考 [DiAuto](https://github.com/shihabal3amri/DiAuto)（AGPL-3.0）
 
-## Local release packaging
-
-The release APK intentionally contains the experimental accessory identity. The Git repository and source archive exclude all accessory and Android signing keys; tests generate synthetic identities at runtime. Source/CI builds omit runtime identity assets by default. Local release builds explicitly select an external asset directory. Publishing the APK makes its bundled identity extractable; building locally does not preserve that identity's confidentiality.
+授權條款見 [LICENSE](LICENSE) 和 [docs/THIRD_PARTY_NOTICES.md](docs/THIRD_PARTY_NOTICES.md)。
