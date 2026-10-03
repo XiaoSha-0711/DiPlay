@@ -59,4 +59,22 @@ internal object DiPlayPreferences {
     fun saveAutoConnect(context: Context, value: Boolean) {
         prefs(context).edit().putBoolean("auto_connect", value).apply()
     }
+
+    /** What the user connected last: [CARPLAY] or [ANDROID_AUTO]; auto-connect repeats it. */
+    fun lastProjection(context: Context): String = prefs(context).getString("last_projection", CARPLAY) ?: CARPLAY
+    fun saveLastProjection(context: Context, projection: String) {
+        prefs(context).edit().putString("last_projection", projection).apply()
+    }
+
+    /** How Android Auto connected last: [AA_WIRELESS], [AA_USB] or [AA_SELF_MODE]. */
+    fun lastAndroidAutoMethod(context: Context): String = prefs(context).getString("last_aa_method", AA_WIRELESS) ?: AA_WIRELESS
+    fun saveLastAndroidAutoMethod(context: Context, method: String) {
+        prefs(context).edit().putString("last_aa_method", method).apply()
+    }
+
+    const val CARPLAY = "carplay"
+    const val ANDROID_AUTO = "android_auto"
+    const val AA_WIRELESS = "wireless"
+    const val AA_USB = "usb"
+    const val AA_SELF_MODE = "self"
 }

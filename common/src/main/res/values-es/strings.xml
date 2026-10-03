@@ -360,7 +360,7 @@
     <string name="use_hevc_leave_off_for_the_widest_head_unit_compatibility">Usa HEVC. Desactívalo para la máxima compatibilidad con unidades principales.</string>
     <string name="use_software_hevc_decoder">Usar decodificador por software HEVC</string>
     <string name="use_usage_content_type_routing_instead_of_stream_type">Usar enrutamiento por uso/tipo de contenido en lugar del tipo de flujo</string>
-    <string name="use_your_last_connection_type_and_selected_iphone">Usa tu último tipo de conexión y el iPhone seleccionado.</string>
+    <string name="use_your_last_connection_type_and_selected_iphone">Vuelve a conectar como la última vez: CarPlay o Android Auto.</string>
     <string name="vpn_consent_was_denied">Se denegó el consentimiento de VPN</string>
     <string name="waiting_for_iphone_over_usb">Esperando iPhone por USB</string>
     <string name="waiting_for_mfi_coprocessor">Esperando al coprocesador MFi</string>
@@ -439,7 +439,7 @@
     <string name="wheel_speed_for_tunnels">Velocidad de las ruedas para túneles · requiere ADB</string>
     <string name="wheel_speed_for_tunnels_description">Con «Informar la ubicación al iPhone» activado, XiaoSha MultiPlay también envía la velocidad de las ruedas y la marcha, para que Apple Maps siga moviendo tu posición en túneles y aparcamientos. Reconecta CarPlay. Requiere ADB por red en la unidad principal.</string>
     <string name="video_while_parked">Vídeo con el coche aparcado</string>
-    <string name="video_while_parked_description">iOS 27: el vídeo que envíes a CarPlay desde el iPhone se reproduce aquí a pantalla completa. Actívalo solo con el coche aparcado, nunca conduciendo; al desactivarlo se cierra el reproductor y el iPhone mantiene solo el audio. El vídeo HTTPS normal (por ejemplo de Safari) funciona; el protegido con FairPlay, como Apple TV+, no. La primera activación reconecta CarPlay.</string>
+    <string name="video_while_parked_description">iOS 27: los vídeos enviados desde el iPhone se ven aquí a pantalla completa. Solo con el coche aparcado; el vídeo protegido como Apple TV+ no se reproduce.</string>
     <string name="cluster_song">Canción en el cuadro · requiere ADB</string>
     <string name="cluster_song_description">El título y el artista de la canción de CarPlay aparecen en la tarjeta de música del cuadro de instrumentos, con reproducción y pausa. La tarjeta se muestra como la fuente de música «otra» de BYD, porque el cuadro no dibuja la fuente propia de CarPlay. Se aplica al instante. Requiere ADB por red en la unidad principal.</string>
     <string name="video_back_to_carplay">Volver a CarPlay</string>
@@ -489,4 +489,8 @@
     <string name="android_auto_self_mode">Modo propio en este teléfono</string>
     <string name="android_auto_settings">Ajustes de Android Auto</string>
     <string name="android_auto_connected">Android Auto está conectado.</string>
+    <string name="method_wireless">Inalámbrico</string>
+    <string name="method_usb">USB</string>
+    <string name="method_self_mode">Modo propio</string>
+    <string name="not_selected">Sin elegir</string>
 </resources>

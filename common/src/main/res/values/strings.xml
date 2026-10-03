@@ -370,7 +370,7 @@
     <string name="use_hevc_leave_off_for_the_widest_head_unit_compatibility">Use HEVC. Leave off for the widest head-unit compatibility.</string>
     <string name="use_software_hevc_decoder">Use software HEVC decoder</string>
     <string name="use_usage_content_type_routing_instead_of_stream_type">Use usage / content-type routing instead of stream type</string>
-    <string name="use_your_last_connection_type_and_selected_iphone">Use your last connection type and selected iPhone.</string>
+    <string name="use_your_last_connection_type_and_selected_iphone">Reconnect the way you last connected: CarPlay or Android Auto.</string>
     <string name="vpn_consent_was_denied">VPN consent was denied</string>
     <string name="waiting_for_iphone_over_usb">Waiting for iPhone over USB</string>
     <string name="waiting_for_mfi_coprocessor">Waiting for MFi coprocessor</string>
@@ -451,7 +451,7 @@
     <string name="wheel_speed_for_tunnels">Wheel speed for tunnels · needs ADB</string>
     <string name="wheel_speed_for_tunnels_description">With Report location to iPhone on, XiaoSha MultiPlay also sends the car\'s wheel speed and gear, so Apple Maps can keep your position moving in tunnels and car parks. Reconnects CarPlay. Needs ADB over network on the head unit.</string>
     <string name="video_while_parked">Video while parked</string>
-    <string name="video_while_parked_description">iOS 27: a video you send to CarPlay from the iPhone plays full screen here. Turn this on only while parked, never while driving; turning it off closes the player and the iPhone keeps the audio only. Plain HTTPS video (for example from Safari) plays; FairPlay-protected video such as Apple TV+ does not. Turning it on the first time reconnects CarPlay.</string>
+    <string name="video_while_parked_description">iOS 27: videos sent from the iPhone play here full screen. Only while parked. Protected video such as Apple TV+ does not play.</string>
     <string name="cluster_song">Song on the dashboard · needs ADB</string>
     <string name="cluster_song_description">The CarPlay song title and artist appear in the music card on the instrument cluster, with play and pause. The card shows as BYD’s “Other” music source, because the dashboard does not draw CarPlay’s own source. Applies at once. Needs ADB over network on the head unit.</string>
     <string name="video_back_to_carplay">Back to CarPlay</string>
@@ -500,4 +500,8 @@
     <string name="android_auto_self_mode">Self Mode on this phone</string>
     <string name="android_auto_settings">Android Auto settings</string>
     <string name="android_auto_connected">Android Auto is connected.</string>
+    <string name="method_wireless">Wireless</string>
+    <string name="method_usb">USB</string>
+    <string name="method_self_mode">Self Mode</string>
+    <string name="not_selected">Not chosen yet</string>
 </resources>

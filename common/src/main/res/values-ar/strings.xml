@@ -360,7 +360,7 @@
     <string name="use_hevc_leave_off_for_the_widest_head_unit_compatibility">استخدم HEVC. أطفئه لأقصى توافقية مع وحدات القيادة.</string>
     <string name="use_software_hevc_decoder">استخدام مفكّك HEVC البرمجي</string>
     <string name="use_usage_content_type_routing_instead_of_stream_type">استخدام توجيه نوع المحتوى/الاستخدام بدلاً من نوع البث</string>
-    <string name="use_your_last_connection_type_and_selected_iphone">استخدم نوع اتصالك الأخير وiPhone المحدد.</string>
+    <string name="use_your_last_connection_type_and_selected_iphone">أعد الاتصال كما في آخر مرة: CarPlay أو Android Auto.</string>
     <string name="vpn_consent_was_denied">رُفضت موافقة VPN</string>
     <string name="waiting_for_iphone_over_usb">بانتظار iPhone عبر USB</string>
     <string name="waiting_for_mfi_coprocessor">بانتظار معالج MFi المساعد</string>
@@ -439,7 +439,7 @@
     <string name="wheel_speed_for_tunnels">سرعة العجلات في الأنفاق · يتطلب ADB</string>
     <string name="wheel_speed_for_tunnels_description">عند تشغيل «إرسال الموقع إلى iPhone»، يرسل XiaoSha MultiPlay أيضًا سرعة عجلات السيارة وناقل الحركة، لتواصل «خرائط Apple» تحريك موقعك في الأنفاق ومواقف السيارات. يعيد الاتصال بـ CarPlay. يتطلب ADB عبر الشبكة على وحدة القيادة.</string>
     <string name="video_while_parked">الفيديو أثناء التوقف</string>
-    <string name="video_while_parked_description">iOS 27: يُعرض الفيديو الذي ترسله من iPhone إلى CarPlay هنا بملء الشاشة. فعّله فقط أثناء التوقف وليس أثناء القيادة؛ إيقافه يغلق المشغّل ويبقي iPhone الصوت فقط. يعمل فيديو HTTPS العادي (مثل Safari)؛ ولا يعمل الفيديو المحمي بـ FairPlay مثل Apple TV+. التفعيل الأول يعيد اتصال CarPlay.</string>
+    <string name="video_while_parked_description">iOS 27: تُعرض مقاطع الفيديو المرسلة من iPhone هنا بملء الشاشة. أثناء التوقف فقط؛ لا يعمل الفيديو المحمي مثل Apple TV+.</string>
     <string name="cluster_song">الأغنية على لوحة العدادات · يتطلب ADB</string>
     <string name="cluster_song_description">يظهر اسم أغنية CarPlay والفنان في بطاقة الموسيقى على لوحة العدادات، مع التشغيل والإيقاف المؤقت. تظهر البطاقة كمصدر الموسيقى «آخر» من BYD، لأن لوحة العدادات لا تعرض مصدر CarPlay الخاص. يُطبَّق فورًا. يتطلب ADB عبر الشبكة على وحدة القيادة.</string>
     <string name="video_back_to_carplay">العودة إلى CarPlay</string>
@@ -489,4 +489,8 @@
     <string name="android_auto_self_mode">الوضع الذاتي على هذا الهاتف</string>
     <string name="android_auto_settings">إعدادات Android Auto</string>
     <string name="android_auto_connected">Android Auto متصل.</string>
+    <string name="method_wireless">لاسلكي</string>
+    <string name="method_usb">USB</string>
+    <string name="method_self_mode">الوضع الذاتي</string>
+    <string name="not_selected">لم يتم الاختيار</string>
 </resources>

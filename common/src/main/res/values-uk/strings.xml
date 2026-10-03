@@ -371,7 +371,7 @@
     <string name="use_hevc_leave_off_for_the_widest_head_unit_compatibility">Використовувати HEVC. Залиште вимкненим для найширшої сумісності з головними пристроями.</string>
     <string name="use_software_hevc_decoder">Використовувати програмний декодер HEVC</string>
     <string name="use_usage_content_type_routing_instead_of_stream_type">Спрямовувати за призначенням і типом вмісту замість типу потоку</string>
-    <string name="use_your_last_connection_type_and_selected_iphone">Використовувати останній спосіб підключення та вибраний iPhone.</string>
+    <string name="use_your_last_connection_type_and_selected_iphone">Підключатися так само, як минулого разу: CarPlay або Android Auto.</string>
     <string name="vpn_consent_was_denied">У дозволі на VPN відмовлено</string>
     <string name="waiting_for_iphone_over_usb">Очікування iPhone через USB</string>
     <string name="waiting_for_mfi_coprocessor">Очікування співпроцесора MFi</string>
@@ -452,7 +452,7 @@
     <string name="wheel_speed_for_tunnels">Швидкість коліс у тунелях · потрібен ADB</string>
     <string name="wheel_speed_for_tunnels_description">Коли ввімкнено передавання геопозиції на iPhone, XiaoSha MultiPlay також надсилає швидкість коліс і передачу автомобіля, щоб Apple Maps могли відстежувати рух у тунелях і паркінгах. CarPlay перепідключиться. Потрібен ADB через мережу на головному пристрої.</string>
     <string name="video_while_parked">Відео на стоянці</string>
-    <string name="video_while_parked_description">iOS 27: відео, надіслане з iPhone у CarPlay, відтворюється тут на весь екран. Вмикайте лише на стоянці, ніколи під час руху; після вимкнення плеєр закривається, а iPhone залишає тільки звук. Звичайне HTTPS-відео (наприклад, із Safari) працює; відео із захистом FairPlay, як-от Apple TV+, — ні. Перше ввімкнення перепідключає CarPlay.</string>
+    <string name="video_while_parked_description">iOS 27: відео з iPhone відтворюється тут на весь екран. Лише на стоянці; захищене відео, як-от Apple TV+, не відтворюється.</string>
     <string name="video_back_to_carplay">Повернутися до CarPlay</string>
     <string name="video_play">Відтворити</string>
     <string name="video_pause">Пауза</string>
@@ -481,4 +481,8 @@
     <string name="android_auto_self_mode">Власний режим на цьому телефоні</string>
     <string name="android_auto_settings">Налаштування Android Auto</string>
     <string name="android_auto_connected">Android Auto підключено.</string>
+    <string name="method_wireless">Без дротів</string>
+    <string name="method_usb">USB</string>
+    <string name="method_self_mode">Власний режим</string>
+    <string name="not_selected">Не вибрано</string>
 </resources>

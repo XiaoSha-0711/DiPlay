@@ -31,7 +31,7 @@ class UiScreenshotTest {
 
     private fun capture(orientation: String) {
         val dir = File("build/screenshots").apply { mkdirs() }
-        val pages = listOf("home", "connection", "settings:connection", "settings:display", "settings:audio", "settings:advanced", "about")
+        val pages = listOf("home", "connection", "settings", "about")
         for (entry in pages) {
             val page = entry.substringBefore(':')
             val tab = entry.substringAfter(':', "")

@@ -369,7 +369,7 @@
     <string name="use_hevc_leave_off_for_the_widest_head_unit_compatibility">使用 HEVC。关闭后可兼容更多车机。</string>
     <string name="use_software_hevc_decoder">使用 HEVC 软件解码器</string>
     <string name="use_usage_content_type_routing_instead_of_stream_type">使用 usage / content-type 路由代替流类型</string>
-    <string name="use_your_last_connection_type_and_selected_iphone">使用上次的连接方式和已选 iPhone。</string>
+    <string name="use_your_last_connection_type_and_selected_iphone">用上次的方式自动连接 CarPlay 或 Android Auto。</string>
     <string name="vpn_consent_was_denied">VPN 授权被拒绝</string>
     <string name="waiting_for_iphone_over_usb">正在等待 USB 连接的 iPhone</string>
     <string name="waiting_for_mfi_coprocessor">正在等待 MFi 协处理器</string>
@@ -450,7 +450,7 @@
     <string name="wheel_speed_for_tunnels">隧道中的车轮速度 · 需要 ADB</string>
     <string name="wheel_speed_for_tunnels_description">开启“向 iPhone 报告位置”后，XiaoSha MultiPlay 还会发送车轮速度和挡位，让 Apple 地图在隧道和停车场里也能继续推算你的位置。会重新连接 CarPlay。需要在车机上开启网络 ADB。</string>
     <string name="video_while_parked">停车时播放视频</string>
-    <string name="video_while_parked_description">iOS 27：从 iPhone 投送到 CarPlay 的视频会在这里全屏播放。只在停车时开启，行驶中请勿使用；关闭后播放器会关闭，iPhone 只保留声音。普通 HTTPS 视频（例如 Safari）可以播放；受 FairPlay 保护的视频（例如 Apple TV+）无法播放。首次开启会重新连接 CarPlay。</string>
+    <string name="video_while_parked_description">iOS 27：iPhone 投送的视频在这里全屏播放。仅限停车时使用；Apple TV+ 等受保护视频无法播放。</string>
     <string name="cluster_song">仪表盘显示歌曲 · 需要 ADB</string>
     <string name="cluster_song_description">CarPlay 正在播放的歌曲名和歌手会显示在仪表盘的音乐卡片中，并同步播放和暂停状态。卡片以比亚迪的“其他”音源显示，因为仪表盘不会绘制 CarPlay 自身的音源。立即生效。需要车机开启网络 ADB。</string>
     <string name="video_back_to_carplay">返回 CarPlay</string>
@@ -500,4 +500,8 @@
     <string name="android_auto_self_mode">本机 Self Mode</string>
     <string name="android_auto_settings">Android Auto 高级设置</string>
     <string name="android_auto_connected">Android Auto 已连接。</string>
+    <string name="method_wireless">无线</string>
+    <string name="method_usb">USB</string>
+    <string name="method_self_mode">Self Mode</string>
+    <string name="not_selected">尚未选择</string>
 </resources>
