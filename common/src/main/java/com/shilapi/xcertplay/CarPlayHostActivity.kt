@@ -287,6 +287,7 @@ class CarPlayHostActivity : ComponentActivity() {
             scheduleExitIfDisconnected()
         }
     }
+    private var stageDetailView: TextView? = null
     private var activeDisplaySize: DisplaySize? = null
     private var pendingDisplaySize: DisplaySize? = null
     private var sessionDisplay: CarPlaySessionDisplay? = null
@@ -707,6 +708,11 @@ class CarPlayHostActivity : ComponentActivity() {
             setTextColor(Color.rgb(241, 245, 252))
         }
         panel.addView(stage)
+        // The raw connection step under the friendly text, so a stuck connection can be reported.
+        stageDetailView = TextView(this).apply {
+            textSize = 13f; gravity = Gravity.CENTER; setTextColor(Color.rgb(154, 160, 170)); setPadding(0, dp(6), 0, 0)
+        }
+        panel.addView(stageDetailView)
         panel.addView(TextView(this).apply {
             text = if (wirelessEnabled) getString(R.string.keep_your_iphone_nearby_with_bluetooth_and_wi_fi_on_allow)
                 else getString(R.string.use_a_usb_data_cable_and_unlock_your_iphone_allow_trust_an)
@@ -3204,9 +3210,19 @@ class CarPlayHostActivity : ComponentActivity() {
             return
         }
         if (controller == null && adoptBackgroundSession()) return
-        val size = activeDisplaySize ?: return
+        val size = activeDisplaySize ?: run { stageDetailView?.text = "waiting for display size"; return }
         val transportReady = if (wirelessEnabled) wirelessPermissionsReady else vpnReady
         val locationReady = !locationReportingEnabled || locationPermissionAvailable
+        if (controller == null) {
+            val waiting = listOfNotNull(
+                if (transportReady) null else if (wirelessEnabled) "wireless permissions" else "VPN consent",
+                if (locationReady) null else "location permission",
+                if (microphonePermissionResolved) null else "microphone permission",
+                if (menuOpen) "settings menu" else null,
+                if (handshakeResetInProgress) "Wi-Fi reset" else null,
+            )
+            if (waiting.isNotEmpty()) stageDetailView?.text = "waiting for " + waiting.joinToString(", ")
+        }
         if (
             !transportReady ||
             !locationReady ||
@@ -3479,6 +3495,7 @@ class CarPlayHostActivity : ComponentActivity() {
     private fun setConnectionStage(message: String) {
         latestStage = message
         stageStatusView?.text = friendlyStage(message)
+        stageDetailView?.text = DiagnosticRedactor.redact(message) ?: ""
         updateDebugOverlays()
     }
 
