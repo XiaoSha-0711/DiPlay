@@ -6,6 +6,12 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Speed-test apps the home screen can open (Android 11+ hides other packages otherwise). -->
+    <queries>
+        <package android:name="org.zwanoo.android.speedtest" />
+        <package android:name="com.netflix.Speedtest" />
+        <package android:name="com.nperf.tester" />
+    </queries>
     <application>
         <activity android:name="com.shilapi.xcertplay.DiPlayActivity"
             android:exported="true" android:launchMode="singleTop"

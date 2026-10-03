@@ -239,7 +239,14 @@ class DiPlayActivity : ComponentActivity() {
                 else connectAndroidAuto(DiPlayPreferences.lastAndroidAutoMethod(this))
             },
             androidAutoMethod = { index -> connectAndroidAuto(aaMethods[index]); render() },
+            speedTest = { openSpeedTest() },
         )
+    }
+
+    /** Opens an installed speed-test app (Speedtest by Ookla, FAST, nPerf), else fast.com in the browser. */
+    private fun openSpeedTest() {
+        val app = SPEED_TEST_PACKAGES.firstNotNullOfOrNull { packageManager.getLaunchIntentForPackage(it) }
+        runCatching { startActivity(app ?: Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://fast.com"))) }
     }
 
     private fun toggleItem(title: Int, description: Int?, value: Boolean, save: (Boolean) -> Unit) =
@@ -875,6 +882,7 @@ class DiPlayActivity : ComponentActivity() {
     private fun space(height: Int) = View(this).apply { layoutParams = LinearLayout.LayoutParams(1, dp(height)) }
     private fun dp(value: Int) = (value * resources.displayMetrics.density).toInt()
     companion object {
+        private val SPEED_TEST_PACKAGES = listOf("org.zwanoo.android.speedtest", "com.netflix.Speedtest", "com.nperf.tester")
         private val BG = Color.rgb(20, 21, 25)
         private val SURFACE = Color.rgb(34, 36, 40)
         private val BORDER = Color.rgb(47, 68, 89)

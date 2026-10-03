@@ -170,6 +170,7 @@
     <string name="diplay">XiaoSha MultiPlay</string>
     <string name="discard_changes_and_exit_settings">放棄更改並離開設定</string>
     <string name="disconnect">斷開連線</string>
+    <string name="speed_test">網路測速</string>
     <string name="discovering_iphone">正在搜尋 iPhone</string>
     <string name="display_and_performance">顯示與效能</string>
     <string name="display_video">顯示與影片</string>
