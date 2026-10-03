@@ -254,9 +254,8 @@ private fun Notice(text: String, onClick: () -> Unit) {
 
 /** A page of grouped rows (settings, connection setup, about). */
 @Composable
-internal fun GroupedPage(title: String, subtitle: String?, groups: List<SettingGroup>) {
-    Text(title, color = MultiPlayColors.Text, fontSize = 30.sp, fontWeight = FontWeight.Medium)
-    subtitle?.let { Text(it, color = MultiPlayColors.Muted, fontSize = 15.sp, modifier = Modifier.padding(top = 6.dp)) }
+internal fun GroupedPage(subtitle: String?, groups: List<SettingGroup>) {
+    subtitle?.let { Text(it, color = MultiPlayColors.Muted, fontSize = 15.sp, modifier = Modifier.padding(start = 4.dp)) }
     groups.forEach { group ->
         Text(group.title, color = MultiPlayColors.Accent, fontSize = 13.sp, fontWeight = FontWeight.Medium, letterSpacing = 1.sp,
             modifier = Modifier.padding(start = 4.dp, top = 20.dp, bottom = 8.dp))

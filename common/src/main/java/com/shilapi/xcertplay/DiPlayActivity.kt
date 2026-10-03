@@ -156,16 +156,22 @@ class DiPlayActivity : ComponentActivity() {
         MultiPlayTheme {
             uiVersion // read so a bump recomposes with fresh preferences
             MultiPlayScreen(
-                title = getString(R.string.diplay),
+                // Sub-pages name themselves in the header; only home carries the app name.
+                title = getString(when (page) {
+                    "settings" -> R.string.settings
+                    "connection" -> R.string.connection_setup
+                    "about" -> R.string.about
+                    else -> R.string.diplay
+                }),
                 home = page == "home",
                 onBack = { page = if (page == "connection" || page == "about") "settings" else "home" },
                 onSettings = { page = "settings" },
                 onExit = { exitApp() },
             ) {
                 when (page) {
-                    "settings" -> GroupedPage(getString(R.string.settings), null, settingsGroups())
-                    "connection" -> GroupedPage(getString(R.string.connection_setup), getString(R.string.set_up_once_your_details_stay_saved_for_the_next_drive_cha), connectionGroups())
-                    "about" -> GroupedPage(getString(R.string.diplay), getString(R.string.carplay_at_home_in_your_car), aboutGroups())
+                    "settings" -> GroupedPage(null, settingsGroups())
+                    "connection" -> GroupedPage(getString(R.string.set_up_once_your_details_stay_saved_for_the_next_drive_cha), connectionGroups())
+                    "about" -> GroupedPage(getString(R.string.carplay_at_home_in_your_car), aboutGroups())
                     else -> HomePage(homeModel(), homeActions)
                 }
             }
