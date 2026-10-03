@@ -6,11 +6,11 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ScrollView
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.GraphicsMode
 import java.io.File
@@ -38,20 +38,35 @@ class UiScreenshotTest {
             runCatching {
                 val intent = Intent().putExtra("page", page).apply { if (tab.isNotEmpty()) putExtra("tab", tab) }
                 val activity = Robolectric.buildActivity(DiPlayActivity::class.java, intent).setup().get()
-                val content = activity.findViewById<ViewGroup>(android.R.id.content).getChildAt(0)
-                val body = (content as? ScrollView)?.getChildAt(0) ?: content
+                Shadows.shadowOf(android.os.Looper.getMainLooper()).idle()
+                val body = activity.findViewById<ViewGroup>(android.R.id.content).getChildAt(0)
                 val width = activity.resources.displayMetrics.widthPixels
+                // Lay the page out much taller than the screen so the whole scroll is drawn, then trim
+                // the empty background below the content.
+                val tall = activity.resources.displayMetrics.heightPixels * 5
                 body.measure(
                     View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
-                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(tall, View.MeasureSpec.EXACTLY),
                 )
-                body.layout(0, 0, body.measuredWidth, body.measuredHeight)
-                val bitmap = Bitmap.createBitmap(body.measuredWidth, body.measuredHeight.coerceAtLeast(1), Bitmap.Config.ARGB_8888)
+                body.layout(0, 0, width, tall)
+                val bitmap = Bitmap.createBitmap(width, tall, Bitmap.Config.ARGB_8888)
                 val canvas = Canvas(bitmap)
-                canvas.drawColor(Color.rgb(20, 21, 25))
+                canvas.drawColor(BACKGROUND)
                 body.draw(canvas)
-                File(dir, "$orientation-${entry.replace(':', '-')}.png").outputStream().use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
+                val row = IntArray(width)
+                var bottom = tall
+                while (bottom > 1) {
+                    bitmap.getPixels(row, 0, width, 0, bottom - 1, width, 1)
+                    if (row.any { it != BACKGROUND }) break
+                    bottom--
+                }
+                val trimmed = Bitmap.createBitmap(bitmap, 0, 0, width, (bottom + 48).coerceAtMost(tall))
+                File(dir, "$orientation-${entry.replace(':', '-')}.png").outputStream().use { trimmed.compress(Bitmap.CompressFormat.PNG, 100, it) }
             }.onFailure { println("UI screenshot $orientation-$entry failed: $it") }
         }
+    }
+
+    private companion object {
+        val BACKGROUND = Color.rgb(20, 21, 25)
     }
 }
