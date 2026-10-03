@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.compose.setContent
+import com.shilapi.xcertplay.host.R
 import com.shilapi.xcertplay.ui.HomeActions
 import com.shilapi.xcertplay.ui.HomeModel
 import com.shilapi.xcertplay.ui.HomePage
