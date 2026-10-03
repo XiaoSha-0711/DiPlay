@@ -486,4 +486,7 @@
     <string name="tab_display">العرض</string>
     <string name="tab_audio">الصوت</string>
     <string name="tab_advanced">متقدم</string>
+    <string name="android_auto_self_mode">الوضع الذاتي على هذا الهاتف</string>
+    <string name="android_auto_settings">إعدادات Android Auto</string>
+    <string name="android_auto_connected">Android Auto متصل.</string>
 </resources>

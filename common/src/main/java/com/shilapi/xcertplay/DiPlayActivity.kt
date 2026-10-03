@@ -32,6 +32,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.andrerinas.openheadunit.AndroidAutoLauncher
 import com.shilapi.xcertplay.host.R
 import com.shilapi.xcertplay.orchestration.WirelessHotspotMode
 import java.io.File
@@ -177,12 +178,6 @@ class DiPlayActivity : ComponentActivity() {
         }
     }
 
-    // The Android Auto receiver (Open Headunit, the androidauto module) ships in the same APK.
-    private fun openAndroidAuto() {
-        val intent = Intent().setClassName(this, "com.andrerinas.openheadunit.main.MainActivity")
-        if (runCatching { startActivity(intent) }.isFailure) toast(getString(R.string.android_auto_unavailable))
-    }
-
     // Two equal cards, one per phone: CarPlay for an iPhone and Android Auto for an Android phone.
     private fun home(content: LinearLayout) {
         val wide = resources.configuration.screenWidthDp >= 720
@@ -213,8 +208,16 @@ class DiPlayActivity : ComponentActivity() {
         }
 
         val androidAuto = projectionCard(getString(R.string.android_auto_card_device), getString(R.string.android_auto))
-        androidAuto.addView(label(getString(R.string.android_auto_hint), 16, MUTED).apply { setPadding(0, dp(4), 0, dp(18)) })
-        androidAuto.addView(button(getString(R.string.open_android_auto), true) { openAndroidAuto() }, matchButton(0, 60))
+        val aaConnected = runCatching { AndroidAutoLauncher.isConnected(this) }.getOrDefault(false)
+        androidAuto.addView(label(getString(if (aaConnected) R.string.android_auto_connected else R.string.android_auto_hint), 16, MUTED).apply { setPadding(0, dp(4), 0, dp(18)) })
+        if (aaConnected) {
+            androidAuto.addView(button(getString(R.string.open_android_auto), true) { AndroidAutoLauncher.openProjection(this) }, matchButton(0, 60))
+        } else {
+            androidAuto.addView(button(getString(R.string.connect_wireless), true) { AndroidAutoLauncher.connectWireless(this) }, matchButton(0, 60))
+            androidAuto.addView(button(getString(R.string.connect_with_usb), false) { AndroidAutoLauncher.connectUsb(this) }, matchButton(10, 56))
+            androidAuto.addView(button(getString(R.string.android_auto_self_mode), false) { AndroidAutoLauncher.startSelfMode(this) }, matchButton(10, 56))
+        }
+        androidAuto.addView(button(getString(R.string.android_auto_settings), false) { AndroidAutoLauncher.openSettings(this) }, matchButton(10, 56))
 
         if (wide) {
             val cards = row().apply { gravity = Gravity.TOP }

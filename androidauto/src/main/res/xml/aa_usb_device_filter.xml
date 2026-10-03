@@ -31,7 +31,6 @@
     <usb-device class="255" subclass="255" protocol="0" />
 
     <usb-device class="255" subclass="66" protocol="1" />   <!-- ADB -->
-    <usb-device class="6" subclass="1" protocol="1" />      <!-- PTP -->
     <usb-device class="224" subclass="1" protocol="3" />    <!-- RNDIS tethering -->
     <usb-device class="239" subclass="4" protocol="1" />    <!-- IAD -->
     <usb-device class="8" subclass="6" protocol="1" />      <!-- MTP over mass storage -->

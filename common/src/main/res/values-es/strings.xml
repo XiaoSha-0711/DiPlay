@@ -486,4 +486,7 @@
     <string name="tab_display">Pantalla</string>
     <string name="tab_audio">Audio</string>
     <string name="tab_advanced">Avanzado</string>
+    <string name="android_auto_self_mode">Modo propio en este teléfono</string>
+    <string name="android_auto_settings">Ajustes de Android Auto</string>
+    <string name="android_auto_connected">Android Auto está conectado.</string>
 </resources>

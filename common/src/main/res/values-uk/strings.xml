@@ -478,4 +478,7 @@
     <string name="tab_display">Екран</string>
     <string name="tab_audio">Звук</string>
     <string name="tab_advanced">Додатково</string>
+    <string name="android_auto_self_mode">Власний режим на цьому телефоні</string>
+    <string name="android_auto_settings">Налаштування Android Auto</string>
+    <string name="android_auto_connected">Android Auto підключено.</string>
 </resources>

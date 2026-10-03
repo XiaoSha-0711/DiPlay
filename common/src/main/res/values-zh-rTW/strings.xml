@@ -497,4 +497,7 @@
     <string name="tab_display">顯示</string>
     <string name="tab_audio">音訊</string>
     <string name="tab_advanced">進階</string>
+    <string name="android_auto_self_mode">本機 Self Mode</string>
+    <string name="android_auto_settings">Android Auto 進階設定</string>
+    <string name="android_auto_connected">Android Auto 已連線。</string>
 </resources>
