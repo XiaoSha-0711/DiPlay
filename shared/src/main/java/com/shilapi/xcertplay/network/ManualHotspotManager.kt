@@ -210,7 +210,7 @@ class ManualHotspotManager(
             .asSequence()
             .filter { isUsableInterface(it, primaryInterface) }
             .mapNotNull { networkInterface ->
-                networkInterface.hotspotAddress()?.let { address ->
+                networkInterface.hotspotAddress()?.takeIf { isLikelyHotspot(networkInterface.name, it) }?.let { address ->
                     LocalHotspotInterface(
                         name = networkInterface.name,
                         hostAddress = address,
@@ -238,7 +238,7 @@ class ManualHotspotManager(
 
     private fun interfaceScore(name: String, address: InetAddress): Int {
         var score = when {
-            name.startsWith("ap") || name.contains("softap", ignoreCase = true) -> 100
+            name.startsWith("ap") || name.startsWith("swlan") || name.contains("softap", ignoreCase = true) -> 100
             name.startsWith("p2p") -> 80
             name.startsWith("wlan") -> 70
             else -> 0
@@ -430,11 +430,29 @@ class ManualHotspotManager(
         val score: Int,
     )
 
-    private companion object {
+    internal companion object {
         const val TAG = "xcertplay-usb"
         const val NANOS_PER_MILLISECOND = 1_000_000L
         val INTERFACE_POLL_NANOS: Long = TimeUnit.MILLISECONDS.toNanos(250)
+        /**
+         * A hotspot is a Wi-Fi interface or carries a private IPv4 network. On a phone, cellular and
+         * IMS links (epdg, ccmni, ...) are also up and not primary; taking one makes the iPhone look
+         * for AirPlay where it can never reach, so with the hotspot off nothing must match.
+         */
+        internal fun isLikelyHotspot(name: String, address: InetAddress): Boolean =
+            WIFI_INTERFACE.matches(name) || (address is Inet4Address && address.isSiteLocalAddress)
+
+        private val WIFI_INTERFACE = Regex("(?:ap|softap|swlan|wlan|p2p)[-0-9].*|.*softap.*", RegexOption.IGNORE_CASE)
+
         val EXCLUDED_INTERFACE_PREFIXES = listOf(
+            "epdg",
+            "ccmni",
+            "ims",
+            "clat",
+            "v4-",
+            "rev_rmnet",
+            "seth",
+            "radio",
             "lo",
             "dummy",
             "rmnet",
