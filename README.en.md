@@ -15,10 +15,6 @@
   <img src="docs/images/home-en.png" width="260" alt="Home">
 </p>
 
-<p align="center">
-  <img src="docs/images/home-landscape-en.png" width="640" alt="Home in landscape">
-</p>
-
 ## Features
 
 | | CarPlay (iPhone) | Android Auto (Android phone) |

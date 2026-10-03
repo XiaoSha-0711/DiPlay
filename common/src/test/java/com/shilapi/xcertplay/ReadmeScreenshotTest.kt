@@ -33,14 +33,8 @@ class ReadmeScreenshotTest {
     @Test @Config(qualifiers = "zh-rTW-w411dp-h891dp-port-xxhdpi")
     fun chinesePortrait() = capture("zh-TW-portrait")
 
-    @Test @Config(qualifiers = "zh-rTW-w891dp-h411dp-land-xxhdpi")
-    fun chineseLandscape() = capture("zh-TW-landscape", settings = false)
-
     @Test @Config(qualifiers = "en-w411dp-h891dp-port-xxhdpi")
     fun englishPortrait() = capture("en-portrait")
-
-    @Test @Config(qualifiers = "en-w891dp-h411dp-land-xxhdpi")
-    fun englishLandscape() = capture("en-landscape", settings = false)
 
     private fun capture(name: String, settings: Boolean = true) {
         runCatching {

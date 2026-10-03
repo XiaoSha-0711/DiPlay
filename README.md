@@ -17,10 +17,6 @@
   <img src="docs/images/settings-zh-TW.png" width="260" alt="設定">
 </p>
 
-<p align="center">
-  <img src="docs/images/home-landscape-zh-TW.png" width="640" alt="橫向首頁">
-</p>
-
 ## 功能
 
 | | CarPlay（iPhone） | Android Auto（Android 手機） |
